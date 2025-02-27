@@ -136,10 +136,10 @@
                     this.$message.error("请输入密码");
                     return;
                 }
-                if (!this.rulesForm.role) {
-                    this.$message.error("请选择角色");
-                    return;
-                }
+                // if (!this.rulesForm.role) {
+                //     this.$message.error("请选择角色");
+                //     return;
+                // }
                 let menus = this.menus;
                 for (let i = 0; i < menus.length; i++) {
                     if (menus[i]?.roleName == this.rulesForm.role) {
