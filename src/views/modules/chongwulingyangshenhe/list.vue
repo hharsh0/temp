@@ -354,7 +354,7 @@
                 _this.$nextTick(() => {
                     var statistic = this.$echarts.init(document.getElementById("statistic"), 'macarons');
                     this.$http({
-                        url: "barSum",
+                        url: `${this.$baseURL}/barSum`,
                         method: "get",
                         params: params
                     }).then(({data}) => {
@@ -703,7 +703,7 @@
 
 
                 this.$http({
-                    url: "chongwulingyangshenhe/page",
+                    url: `${this.$baseURL}/chongwulingyangshenhe/page`,
                     method: "get",
                     params: params
                 }).then(({data}) => {
@@ -719,7 +719,7 @@
 
                 //查询级联表搜索条件所有列表
                 this.$http({
-                    url: "dictionary/page?dicCode=chongwu_types&page=1&limit=100",
+                    url: `${this.$baseURL}/dictionary/page?dicCode=chongwu_types&page=1&limit=100`,
                     method: "get",
                     page: 1,
                     limit: 100,
@@ -773,7 +773,7 @@
                     type: "warning"
                 }).then(() => {
                     this.$http({
-                        url: "chongwulingyangshenhe/delete",
+                        url: `${this.$baseURL}/chongwulingyangshenhe/delete`,
                         method: "post",
                         data: ids
                     }).then(({data}) => {
@@ -796,7 +796,7 @@
             chongwulingyangshenheUploadSuccess(data){
                 let _this = this;
                 _this.$http({
-                    url: "chongwulingyangshenhe/batchInsert?fileName=" + data.file,
+                    url: `${this.$baseURL}/chongwulingyangshenhe/batchInsert?fileName=${data.file}`,
                     method: "get"
                 }).then(({data}) => {
                     if(data && data.code === 0){
@@ -840,7 +840,7 @@
                         return false;
                 }
                 this.$http({
-                    url:`chongwulingyangshenhe/update`,
+                    url:`${this.$baseURL}/chongwulingyangshenhe/update`,
                     method: "post",
                     data: _this.form
                 }).then(({ data }) => {
@@ -850,7 +850,7 @@
 							jieshuTypes:2
 						}
                        this.$http({
-                           url:`chongwulingyang/update`,
+                           url:`${this.$baseURL}/chongwulingyang/update`,
                            method: "post",
                            data: par
                        }).then(({ data }) => {

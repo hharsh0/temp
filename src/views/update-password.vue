@@ -56,7 +56,7 @@ export default {
   },
   mounted() {
     this.$http({
-      url: `${this.$storage.get("sessionTable")}/session`,
+      url: `${this.$baseURL}/${this.$storage.get("sessionTable")}/session`,
       method: "get"
     }).then(({ data }) => {
       if (data && data.code === 0) {
@@ -92,7 +92,7 @@ export default {
           this.user.password = this.ruleForm.newpassword;
           this.user.mima = this.ruleForm.newpassword;
           this.$http({
-            url: `${this.$storage.get("sessionTable")}/update`,
+            url: `${this.$baseURL}/${this.$storage.get("sessionTable")}/update`,
             method: "post",
             data: this.user
           }).then(({ data }) => {

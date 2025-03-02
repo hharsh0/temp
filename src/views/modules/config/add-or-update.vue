@@ -180,7 +180,7 @@ export default {
     // 多级联动参数
     info(id) {
       this.$http({
-        url: `config/info/${id}`,
+        url: `${this.$baseURL}/config/info/${id}`,
         method: "get"
       }).then(({ data }) => {
         if (data && data.code === 0) {
@@ -198,7 +198,7 @@ export default {
       this.$refs["ruleForm"].validate(valid => {
         if (valid) {
           this.$http({
-            url: `config/${!this.ruleForm.id ? "save" : "update"}`,
+            url: `${this.$baseURL}/config/${!this.ruleForm.id ? "save" : "update"}`,
             method: "post",
             data: this.ruleForm
           }).then(({ data }) => {

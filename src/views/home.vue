@@ -15,7 +15,7 @@ export default {
     init(){
         if(this.$storage.get('Token')){
         this.$http({
-            url: `${this.$storage.get('sessionTable')}/session`,
+            url: `${this.$baseURL}/${this.$storage.get('sessionTable')}/session`,
             method: "get"
         }).then(({ data }) => {
             if (data && data.code != 0) {

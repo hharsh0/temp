@@ -283,7 +283,7 @@
                 _this.$nextTick(() => {
                     var statistic = this.$echarts.init(document.getElementById("statistic"), 'macarons');
                     this.$http({
-                        url: "barSum",
+                        url: `${this.$baseURL}/barSum`,
                         method: "get",
                         params: params
                     }).then(({data}) => {
@@ -628,7 +628,7 @@
 
 
                 this.$http({
-                    url: "chongwu/page",
+                    url: `${this.$baseURL}/chongwu/page`,
                     method: "get",
                     params: params
                 }).then(({data}) => {
@@ -646,7 +646,7 @@
                 //查询当前表搜索条件所有列表
                 //填充下拉框选项
                 this.$http({
-                    url: "dictionary/page?dicCode=chongwu_types&page=1&limit=100",
+                    url: `${this.$baseURL}/dictionary/page?dicCode=chongwu_types&page=1&limit=100`,
                     method: "get",
                 }).then(({data}) => {
                     if(data && data.code === 0){
@@ -697,7 +697,7 @@
                     type: "warning"
                 }).then(() => {
                     this.$http({
-                        url: "chongwu/delete",
+                        url: `${this.$baseURL}/chongwu/delete`,
                         method: "post",
                         data: ids
                     }).then(({data}) => {
@@ -720,7 +720,7 @@
             chongwuUploadSuccess(data){
                 let _this = this;
                 _this.$http({
-                    url: "chongwu/batchInsert?fileName=" + data.file,
+                    url: `${this.$baseURL}/chongwu/batchInsert?fileName=${data.file}`,
                     method: "get"
                 }).then(({data}) => {
                     if(data && data.code === 0){

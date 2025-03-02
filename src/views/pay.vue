@@ -79,7 +79,7 @@ export default {
       this.role = this.$storage.get("role");
       this.userId = this.$storage.get("userId");
       this.$http({
-          url: `${this.sessionTable}/session`,
+          url: `${this.$baseURL}/${this.$baseURL}/${this.sessionTable}/session`,
           method: "get"
       }).then(({ data }) => {
           if (data && data.code === 0) {
@@ -103,7 +103,7 @@ export default {
         type: "warning"
       }).then(() => {
         _this.$http({
-          url: `${_this.sessionTable}/update`,
+          url: `${this.$baseURL}/${_this.sessionTable}/update`,
           method: "post",
           data: {
               id:_this.userId,

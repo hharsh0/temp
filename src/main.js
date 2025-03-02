@@ -1,7 +1,3 @@
-// import { createApp } from 'vue'
-// import App from './App.vue'
-
-// createApp(App).mount('#app')
 
 /* eslint-disable */
 import { createApp } from 'vue';
@@ -35,6 +31,8 @@ const app = createApp(App);
 app.use(router);
 app.use(ElementPlus, { size: 'medium', zIndex: 3000 });
 
+const BASE_URL = "http://localhost:8080/liulangdongwubeihua";
+
 // Setup Global Properties
 app.config.globalProperties.$validate = validate;
 app.config.globalProperties.$http = http;
@@ -47,6 +45,7 @@ app.config.globalProperties.isAuth = isAuth;
 app.config.globalProperties.getCurDateTime = getCurDateTime;
 app.config.globalProperties.getCurDate = getCurDate;
 app.config.globalProperties.$md5 = md5;
+app.config.globalProperties.$baseURL = BASE_URL;
 
 // Register Components
 app.component('bread-crumbs', BreadCrumbs);

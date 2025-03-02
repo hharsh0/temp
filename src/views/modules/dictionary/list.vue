@@ -287,7 +287,7 @@
                 _this.$nextTick(() => {
                     var statistic = this.$echarts.init(document.getElementById("statistic"), 'macarons');
                     this.$http({
-                        url: "barSum",
+                        url: `${this.$baseURL}/barSum`,
                         method: "get",
                         params: params
                     }).then(({data}) => {
@@ -628,7 +628,7 @@
 
 
                 this.$http({
-                    url: "dictionary/page",
+                    url: `${this.$baseURL}/dictionary/page`,
                     method: "get",
                     params: params
                 }).then(({data}) => {
@@ -688,7 +688,7 @@
                     type: "warning"
                 }).then(() => {
                     this.$http({
-                        url: "dictionary/delete",
+                        url: `${this.$baseURL}/dictionary/delete`,
                         method: "post",
                         data: ids
                     }).then(({data}) => {
@@ -711,7 +711,7 @@
             dictionaryUploadSuccess(data){
                 let _this = this;
                 _this.$http({
-                    url: "dictionary/batchInsert?fileName=" + data.file,
+                    url: `${this.$baseURL}/dictionary/batchInsert?fileName=${data.file}`,
                     method: "get"
                 }).then(({data}) => {
                     if(data && data.code === 0){

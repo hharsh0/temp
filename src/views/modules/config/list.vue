@@ -366,7 +366,7 @@ export default {
             params['name'] = '%' + this.searchForm.name + '%'
           }
       this.$http({
-        url: "config/page",
+        url: `${this.$baseURL}/config/page`,
         method: "get",
         params: params
       }).then(({ data }) => {
@@ -425,7 +425,7 @@ export default {
         type: "warning"
       }).then(() => {
         this.$http({
-          url: "config/delete",
+          url: `${this.$baseURL}/config/delete`,
           method: "post",
           data: ids
         }).then(({ data }) => {

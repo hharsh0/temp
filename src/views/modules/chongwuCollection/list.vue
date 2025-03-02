@@ -666,7 +666,7 @@
 
 
                 this.$http({
-                    url: "chongwuCollection/page",
+                    url: `${this.$baseURL}/chongwuCollection/page`,
                     method: "get",
                     params: params
                 }).then(({data}) => {
@@ -682,7 +682,7 @@
 
                 //查询级联表搜索条件所有列表
                 this.$http({
-                    url: "dictionary/page?dicCode=chongwu_types&page=1&limit=100",
+                    url: `${this.$baseURL}/dictionary/page?dicCode=chongwu_types&page=1&limit=100`,
                     method: "get",
                     page: 1,
                     limit: 100,
@@ -736,7 +736,7 @@
                     type: "warning"
                 }).then(() => {
                     this.$http({
-                        url: "chongwuCollection/delete",
+                        url: `${this.$baseURL}/chongwuCollection/delete`,
                         method: "post",
                         data: ids
                     }).then(({data}) => {
@@ -759,7 +759,7 @@
             chongwuCollectionUploadSuccess(data){
                 let _this = this;
                 _this.$http({
-                    url: "chongwuCollection/batchInsert?fileName=" + data.file,
+                    url: `${this.$baseURL}/chongwuCollection/batchInsert?fileName=${data.file}`,
                     method: "get"
                 }).then(({data}) => {
                     if(data && data.code === 0){

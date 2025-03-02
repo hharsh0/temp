@@ -150,7 +150,7 @@
             this.addEditUploadStyleChange()
             //获取下拉框信息
                 this.$http({
-                    url:`dictionary/page?page=1&limit=100&sort=&order=&dicCode=forum_state_types`,
+                    url:`${this.$baseURL}/dictionary/page?page=1&limit=100&sort=&order=&dicCode=forum_state_types`,
                     method: "get"
                 }).then(({ data }) => {
                     if (data && data.code === 0) {
@@ -159,7 +159,7 @@
                 });
 
          this.$http({
-             url: `yonghu/page?page=1&limit=100`,
+             url: `${this.$baseURL}/yonghu/page?page=1&limit=100`,
              method: "get"
          }).then(({ data }) => {
              if (data && data.code === 0) {
@@ -167,7 +167,7 @@
             }
          });
          this.$http({
-             url: `ziyuanzhe/page?page=1&limit=100`,
+             url: `${this.$baseURL}/ziyuanzhe/page?page=1&limit=100`,
              method: "get"
          }).then(({ data }) => {
              if (data && data.code === 0) {
@@ -194,7 +194,7 @@
                 }
                 // 获取用户信息
                 this.$http({
-                    url:`${this.$storage.get("sessionTable")}/session`,
+                    url:`${this.$baseURL}/${this.$storage.get("sessionTable")}/session`,
                     method: "get"
                 }).then(({ data }) => {
                     if (data && data.code === 0) {
@@ -206,7 +206,7 @@
             },
             yonghuChange(id){
                 this.$http({
-                    url: `yonghu/info/`+id,
+                    url: `${this.$baseURL}/yonghu/info/`+id,
                     method: "get"
                 }).then(({ data }) => {
                     if (data && data.code === 0) {
@@ -216,7 +216,7 @@
             },
             ziyuanzheChange(id){
                 this.$http({
-                    url: `ziyuanzhe/info/`+id,
+                    url: `${this.$baseURL}/ziyuanzhe/info/`+id,
                     method: "get"
                 }).then(({ data }) => {
                     if (data && data.code === 0) {
@@ -228,7 +228,7 @@
             info(id) {
                 let _this =this;
                 _this.$http({
-                    url: `forum/info/${id}`,
+                    url: `${this.$baseURL}/forum/info/${id}`,
                     method: 'get'
                 }).then(({ data }) => {
                     if (data && data.code === 0) {
@@ -245,7 +245,7 @@
                 this.$refs["ruleForm"].validate(valid => {
                     if (valid) {
                         this.$http({
-                            url:`forum/${!this.ruleForm.id ? "save" : "update"}`,
+                            url:`${this.$baseURL}/forum/${!this.ruleForm.id ? "save" : "update"}`,
                             method: "post",
                             data: this.ruleForm
                         }).then(({ data }) => {

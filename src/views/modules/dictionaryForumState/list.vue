@@ -313,7 +313,7 @@
                 params['dicCode'] = "forum_state_types"//编码名字
                 params['dicName'] = "帖子状态",//汉字名字
                 this.$http({
-                    url: "dictionary/page",
+                    url: `${this.$baseURL}/dictionary/page`,
                     method: "get",
                     params: params
                 }).then(({ data }) => {
@@ -367,7 +367,7 @@
                     type: "warning"
                 }).then(() => {
                     this.$http({
-                    url: "dictionary/delete",
+                    url: `${this.$baseURL}/dictionary/delete`,
                     method: "post",
                     data: ids
                 }).then(({ data }) => {

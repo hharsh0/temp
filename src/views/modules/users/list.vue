@@ -383,7 +383,7 @@ export default {
             params['username'] = '%' + this.searchForm.username + '%'
           }
       this.$http({
-        url: "users/page",
+        url: `${this.$baseURL}/users/page`,
         method: "get",
         params: params
       }).then(({ data }) => {
@@ -442,7 +442,7 @@ export default {
         type: "warning"
       }).then(() => {
         this.$http({
-          url: "users/delete",
+          url: `${this.$baseURL}/users/delete`,
           method: "post",
           data: ids
         }).then(({ data }) => {

@@ -123,7 +123,7 @@ export default {
 
     this.flag = table;
     this.$http({
-      url: `${this.$storage.get("sessionTable")}/session`,
+      url: `${this.$baseURL}/${this.$storage.get("sessionTable")}/session`,
       method: "get"
     }).then(({ data }) => {
       if (data && data.code === 0) {
@@ -139,7 +139,7 @@ export default {
 // 注册表 自愿者 的级联表
 
       this.$http({
-          url: `dictionary/page?page=1&limit=100&sort=&order=&dicCode=sex_types`,
+          url: `${this.baseURL}/dictionary/page?page=1&limit=100&sort=&order=&dicCode=sex_types`,
           method: "get"
       }).then(({ data }) => {
           if (data && data.code === 0) {
@@ -204,7 +204,7 @@ export default {
         return	
       }
       this.$http({
-        url: `${this.$storage.get("sessionTable")}/update`,
+        url: `${this.$baseURL}/${this.$storage.get("sessionTable")}/update`,
         method: "post",
         data: this.ruleForm
       }).then(({ data }) => {

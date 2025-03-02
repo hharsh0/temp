@@ -445,7 +445,7 @@
                 _this.$nextTick(() => {
                     var statistic = this.$echarts.init(document.getElementById("statistic"), 'macarons');
                     this.$http({
-                        url: "barSum",
+                        url: `${this.$baseURL}/barSum`,
                         method: "get",
                         params: params
                     }).then(({data}) => {
@@ -798,7 +798,7 @@
 
 
                 this.$http({
-                    url: "chongwujiyang/page",
+                    url: `${this.$baseURL}/chongwujiyang/page`,
                     method: "get",
                     params: params
                 }).then(({data}) => {
@@ -816,7 +816,7 @@
                 //查询当前表搜索条件所有列表
                 //填充下拉框选项
                 this.$http({
-                    url: "dictionary/page?dicCode=chongwu_types&page=1&limit=100",
+                    url: `${this.$baseURL}/dictionary/page?dicCode=chongwu_types&page=1&limit=100`,
                     method: "get",
                 }).then(({data}) => {
                     if(data && data.code === 0){
@@ -825,7 +825,7 @@
                 });
                 //填充下拉框选项
                 this.$http({
-                    url: "dictionary/page?dicCode=chongwujiyang_yesno_types&page=1&limit=100",
+                    url: `${this.$baseURL}/dictionary/page?dicCode=chongwujiyang_yesno_types&page=1&limit=100`,
                     method: "get",
                 }).then(({data}) => {
                     if(data && data.code === 0){
@@ -876,7 +876,7 @@
                     type: "warning"
                 }).then(() => {
                     this.$http({
-                        url: "chongwujiyang/delete",
+                        url: `${this.$baseURL}/chongwujiyang/delete`,
                         method: "post",
                         data: ids
                     }).then(({data}) => {
@@ -899,7 +899,7 @@
             chongwujiyangUploadSuccess(data){
                 let _this = this;
                 _this.$http({
-                    url: "chongwujiyang/batchInsert?fileName=" + data.file,
+                    url: `${this.$baseURL}/chongwujiyang/batchInsert?fileName=${data.file}`,
                     method: "get"
                 }).then(({data}) => {
                     if(data && data.code === 0){
@@ -941,7 +941,7 @@
                         return false;
                 }
                 this.$http({
-                    url:`chongwujiyang/update`,
+                    url:`${this.$baseURL}/chongwujiyang/update`,
                     method: "post",
                     data: _this.form
                 }).then(({ data }) => {

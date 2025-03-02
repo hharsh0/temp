@@ -318,7 +318,7 @@
                 _this.$nextTick(() => {
                     var statistic = this.$echarts.init(document.getElementById("statistic"), 'macarons');
                     this.$http({
-                        url: "barSum",
+                        url: `${this.$baseURL}/barSum`,
                         method: "get",
                         params: params
                     }).then(({data}) => {
@@ -663,7 +663,7 @@
 
 
                 this.$http({
-                    url: "ziyuanzhe/page",
+                    url: `${this.$baseURL}/ziyuanzhe/page`,
                     method: "get",
                     params: params
                 }).then(({data}) => {
@@ -681,7 +681,7 @@
                 //查询当前表搜索条件所有列表
                 //填充下拉框选项
                 this.$http({
-                    url: "dictionary/page?dicCode=sex_types&page=1&limit=100",
+                    url: `${this.$baseURL}/dictionary/page?dicCode=sex_types&page=1&limit=100`,
                     method: "get",
                 }).then(({data}) => {
                     if(data && data.code === 0){
@@ -732,7 +732,7 @@
                     type: "warning"
                 }).then(() => {
                     this.$http({
-                        url: "ziyuanzhe/delete",
+                        url: `${this.$baseURL}/ziyuanzhe/delete`,
                         method: "post",
                         data: ids
                     }).then(({data}) => {
@@ -754,7 +754,7 @@
             resetPassword(id) {
                 //重置密码
                 this.$http({
-                    url: "ziyuanzhe/resetPassword?id=" + id,
+                    url: `${this.$baseURL}/ziyuanzhe/resetPassword?id=${id}`,
                     method: "get",
                     // id:id
                 }).then(({data}) => {
@@ -767,7 +767,7 @@
             ziyuanzheUploadSuccess(data){
                 let _this = this;
                 _this.$http({
-                    url: "ziyuanzhe/batchInsert?fileName=" + data.file,
+                    url: `${this.$baseURL}/ziyuanzhe/batchInsert?fileName=${data.file}`,
                     method: "get"
                 }).then(({data}) => {
                     if(data && data.code === 0){

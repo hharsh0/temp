@@ -110,7 +110,7 @@
                 }else{
                     //查询最大值 start
                     this.$http({
-                        url: `dictionary/maxCodeIndex`,
+                        url: `${this.$baseURL}/dictionary/maxCodeIndex`,
                         method: "post",
                         data: {"dicCode":"chongwu_collection_types"}
                     }).then(({ data }) => {
@@ -126,7 +126,7 @@
             // 多级联动参数
             info(id) {
                 this.$http({
-                    url: `dictionary/info/${id}`,
+                    url: `${this.$baseURL}/dictionary/info/${id}`,
                     method: "get"
                 }).then(({ data }) => {
                     if (data && data.code === 0) {
@@ -150,7 +150,7 @@
                         ruleForm["dicCode"]="chongwu_collection_types";
                         ruleForm["dicName"]="收藏表类型";
                         this.$http({
-                            url: `dictionary/${!this.ruleForm.id ? "save" : "update"}`,
+                            url: `${this.$baseURL}/dictionary/${!this.ruleForm.id ? "save" : "update"}`,
                             method: "post",
                             data: ruleForm
                         }).then(({ data }) => {

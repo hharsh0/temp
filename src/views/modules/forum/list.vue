@@ -432,7 +432,7 @@
                 _this.$nextTick(() => {
                     var statistic = this.$echarts.init(document.getElementById("statistic"), 'macarons');
                     this.$http({
-                        url: "barSum",
+                        url: `${this.$baseURL}/barSum`,
                         method: "get",
                         params: params
                     }).then(({data}) => {
@@ -782,7 +782,7 @@
 
 
                 this.$http({
-                    url: "forum/list",
+                    url: `${this.$baseURL}/forum/list`,
                     method: "get",
                     params: params
                 }).then(({data}) => {
@@ -842,7 +842,7 @@
                     type: "warning"
                 }).then(() => {
                     this.$http({
-                        url: "forum/delete",
+                        url: `${this.$baseURL}/forum/delete`,
                         method: "post",
                         data: ids
                     }).then(({data}) => {
@@ -866,7 +866,7 @@
             forumUploadSuccess(data){
                 let _this = this;
                 _this.$http({
-                    url: "forum/batchInsert?fileName=" + data.file,
+                    url: `${this.$baseURL}/forum/batchInsert?fileName=${data.file}`,
                     method: "get"
                 }).then(({data}) => {
                     if(data && data.code === 0){
@@ -910,7 +910,7 @@
                     superIds:_this.superIds
                 }
                 _this.$http({
-                    url: "forum/list",
+                    url: `${this.$baseURL}/forum/list`,
                     method: "get",
                     params: params
                 }).then(({data}) => {
@@ -963,7 +963,7 @@
                 let ids = [];
                 ids.push(Number(id));
                 _this.$http({
-                    url: "forum/delete",
+                    url: `${this.$baseURL}/forum/delete`,
                     method: "post",
                     data: ids
                 }).then(({data}) => {
@@ -991,7 +991,7 @@
                 }
                 let data = {"superIds":_this.superIds,"forumStateTypes":2,"forumContent":_this.forumReplyContent};
                 _this.$http({
-                    url:`forum/save`,
+                    url:`${this.$baseURL}/forum/save`,
                     method: "post",
                     data: data
                 }).then(({ data }) => {

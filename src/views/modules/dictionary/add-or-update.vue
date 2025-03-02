@@ -175,7 +175,7 @@
                 }
                 // 获取用户信息
                 this.$http({
-                    url:`${this.$storage.get("sessionTable")}/session`,
+                    url:`${this.$baseURL}/${this.$storage.get("sessionTable")}/session`,
                     method: "get"
                 }).then(({ data }) => {
                     if (data && data.code === 0) {
@@ -189,7 +189,7 @@
             info(id) {
                 let _this =this;
                 _this.$http({
-                    url: `dictionary/info/${id}`,
+                    url: `${this.$baseURL}/dictionary/info/${id}`,
                     method: 'get'
                 }).then(({ data }) => {
                     if (data && data.code === 0) {
@@ -204,7 +204,7 @@
                 this.$refs["ruleForm"].validate(valid => {
                     if (valid) {
                         this.$http({
-                            url:`dictionary/${!this.ruleForm.id ? "save" : "update"}`,
+                            url:`${this.$baseURL}/dictionary/${!this.ruleForm.id ? "save" : "update"}`,
                             method: "post",
                             data: this.ruleForm
                         }).then(({ data }) => {

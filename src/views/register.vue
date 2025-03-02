@@ -110,7 +110,7 @@
                                 return
                             }
                 this.$http({
-                    url: `${this.tableName}/register`,
+                    url: `${this.$baseURL}/${this.tableName}/register`,
                     method: "post",
                     data:this.ruleForm
                 }).then(({ data }) => {
