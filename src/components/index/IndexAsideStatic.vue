@@ -8,7 +8,7 @@
         <el-menu mode="horizontal" :unique-opened="true" class="el-menu-demo" style="height:100%;" background-color="#5E5B5B" text-color="#ffffff" active-text-color="#E8C66F" default-active="0">
           <el-menu-item index="(0).toString()" :style="menulistBorderBottom" @click="menuHandler('')"><i v-if="true" class="el-icon-s-home" />首页</el-menu-item>
           <el-submenu :index="(1).toString()" :style="menulistBorderBottom">
-            <template slot="title">
+            <template v-slot:title>
               <i v-if="true" class="el-icon-user-solid" />
               <span>个人中心</span>
             </template>
@@ -16,7 +16,7 @@
             <el-menu-item :index="(1-2).toString()" @click="menuHandler('center')">个人信息</el-menu-item>
           </el-submenu>
           <el-submenu :style="menulistBorderBottom" v-for=" (menu,index) in item.backMenu" :key="menu.menu" :index="(index+2).toString()">
-            <template slot="title">
+            <template v-slot:title>
               <i v-if="true" :class="icons[index]" />
               <span>{{ menu.menu }}</span>
             </template>

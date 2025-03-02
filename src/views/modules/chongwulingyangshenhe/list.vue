@@ -1,6 +1,6 @@
 <template>
     <div class="main-content">
-        <el-dialog title="审核" :visible.sync="chongwulingyangshenheYesnoTypesVisible">
+        <el-dialog title="审核" v-model:visible="chongwulingyangshenheYesnoTypesVisible">
             <el-form :model="form">
                 <input type="hidden" v-model="form.id">
                 <el-form-item label="审核" >
@@ -118,7 +118,7 @@
                                       prop="chongwulingyangName"
                                       header-align="center"
                                       label="标题">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             {{scope.row.chongwulingyangName}}
                         </template>
                     </el-table-column>
@@ -126,7 +126,7 @@
                                header-align="center"
                                width="200"
                                label="宠物图片">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             <div v-if="scope.row.chongwulingyangPhoto">
                                 <img :src="scope.row.chongwulingyangPhoto" width="100" height="100">
                             </div>
@@ -137,7 +137,7 @@
                                       prop="yonghuName"
                                       header-align="center"
                                       label="用户姓名">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             {{scope.row.yonghuName}}
                         </template>
                     </el-table-column>
@@ -145,7 +145,7 @@
                                header-align="center"
                                width="200"
                                label="头像">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             <div v-if="scope.row.yonghuPhoto">
                                 <img :src="scope.row.yonghuPhoto" width="100" height="100">
                             </div>
@@ -156,7 +156,7 @@
                                       prop="yonghuPhone"
                                       header-align="center"
                                       label="手机号">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             {{scope.row.yonghuPhone}}
                         </template>
                     </el-table-column>
@@ -164,7 +164,7 @@
                                       prop="chongwurenlingshenheText"
                                       header-align="center"
                                       label="认领凭据">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             <span v-if="scope.row.chongwurenlingshenheText != null &&scope.row.chongwurenlingshenheText.length>10">
                                 {{scope.row.chongwurenlingshenheText.slice(0,10)}}...
                             </span>
@@ -177,7 +177,7 @@
                                       prop="chongwulingyangshenheYesnoTypes"
                                       header-align="center"
                                       label="申请状态">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             {{scope.row.chongwulingyangshenheYesnoValue}}
                         </template>
                     </el-table-column>
@@ -185,7 +185,7 @@
                                       prop="chongwulingyangshenheYesnoText"
                                       header-align="center"
                                       label="申请结果">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             <span v-if="scope.row.chongwulingyangshenheYesnoText != null &&scope.row.chongwulingyangshenheYesnoText.length>10">
                                 {{scope.row.chongwulingyangshenheYesnoText.slice(0,10)}}...
                             </span>
@@ -198,7 +198,7 @@
                     <el-table-column width="300" :align="contents.tableAlign"
                                      header-align="center"
                                      label="操作">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             <el-button v-if="isAuth('chongwulingyangshenhe','查看')" type="success" icon="el-icon-tickets" size="mini" @click="addOrUpdateHandler(scope.row.id,'info')">详情</el-button>
                             <el-button v-if="isAuth('chongwulingyangshenhe','修改')" type="primary" icon="el-icon-edit" size="mini" @click="addOrUpdateHandler(scope.row.id)">修改</el-button>
 
@@ -229,7 +229,7 @@
 
 
 
-        <el-dialog title="统计报表" :visible.sync="chartVisiable" width="800">
+        <el-dialog title="统计报表" v-model:visible="chartVisiable" width="800">
             <el-date-picker
                     v-model="echartsDate"
                     type="year"

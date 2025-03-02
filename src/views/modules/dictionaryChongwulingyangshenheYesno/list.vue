@@ -53,7 +53,7 @@
                                       prop="codeIndex"
                                       header-align="center"
                                       label="审核状态编码">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             {{scope.row.codeIndex}}
                         </template>
                     </el-table-column>
@@ -61,7 +61,7 @@
                                       prop="indexName"
                                       header-align="center"
                                       label="审核状态名称">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             {{scope.row.indexName}}
                         </template>
                     </el-table-column>
@@ -76,7 +76,7 @@
                     <el-table-column width="300" :align="contents.tableAlign"
                                      header-align="center"
                                      label="操作">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             <el-button v-if="isAuth('dictionaryChongwulingyangshenheYesno','查看')" type="success" icon="el-icon-tickets" size="mini" @click="addOrUpdateHandler(scope.row.id,'info')">详情</el-button>
                             <el-button v-if="isAuth('dictionaryChongwulingyangshenheYesno','修改')" type="primary" icon="el-icon-edit" size="mini" @click="addOrUpdateHandler(scope.row.id)">修改</el-button>
                             <el-button v-if="isAuth('dictionaryChongwulingyangshenheYesno','删除')" type="danger" icon="el-icon-delete" size="mini" @click="deleteHandler(scope.row.id)">删除</el-button>

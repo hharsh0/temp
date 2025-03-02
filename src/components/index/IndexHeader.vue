@@ -1,30 +1,64 @@
 <template>
-    <!-- <el-header>
-        <el-menu background-color="#00c292" text-color="#FFFFFF" active-text-color="#FFFFFF" mode="horizontal">
-            <div class="fl title">{{this.$project.projectName}}</div>
-            <div class="fr logout" style="display:flex;">
-                <el-menu-item index="3">
-                    <div>{{this.$storage.get('role')}} {{this.$storage.get('adminName')}}</div>
-                </el-menu-item>
-                <el-menu-item @click="onLogout" index="2">
-                    <div>退出登录</div>
-                </el-menu-item>
-            </div>
-        </el-menu>
-    </el-header> -->
-    <div class="navbar" :style="{backgroundColor:heads.headBgColor,height:heads.headHeight,boxShadow:heads.headBoxShadow,lineHeight:heads.headHeight}">
-        <div class="title-menu" :style="{justifyContent:heads.headTitleStyle=='1'?'flex-start':'center'}">
-            <el-image v-if="heads.headTitleImg" class="title-img" :style="{width:heads.headTitleImgWidth,height:heads.headTitleImgHeight,boxShadow:heads.headTitleImgBoxShadow,borderRadius:heads.headTitleImgBorderRadius}" :src="heads.headTitleImgUrl" fit="cover"></el-image>
-            <div class="title-name" :style="{color:heads.headFontColor,fontSize:heads.headFontSize}">{{this.$project.projectName}}</div>
-            <!--             <img src="../../../../img/logo.jpg" style="width: 60px;height: 60px;border-radius:60px"> -->
+    <div 
+      class="navbar flex items-center justify-between px-6 shadow-md"
+      :style="{
+        backgroundColor: heads.headBgColor,
+        height: heads.headHeight,
+        boxShadow: heads.headBoxShadow,
+        lineHeight: heads.headHeight,
+      }"
+    >
+      <div 
+        class="title-menu flex items-center" 
+        :class="heads.headTitleStyle === '1' ? 'justify-start' : 'justify-center'"
+      >
+        <el-image 
+          v-if="heads.headTitleImg" 
+          class="title-img rounded-md shadow-md"
+          :style="{
+            width: heads.headTitleImgWidth,
+            height: heads.headTitleImgHeight,
+            boxShadow: heads.headTitleImgBoxShadow,
+            borderRadius: heads.headTitleImgBorderRadius,
+          }"
+          :src="heads.headTitleImgUrl" 
+          fit="cover"
+        ></el-image>
+        <div 
+          class="title-name font-semibold ml-4"
+          :style="{ color: heads.headFontColor, fontSize: heads.headFontSize }"
+        >
+          {{ $project.projectName }}
         </div>
-        <div class="right-menu">
-            <div class="user-info" :style="{color:heads.headUserInfoFontColor,fontSize:heads.headUserInfoFontSize}">{{this.$storage.get('role')}} {{this.$storage.get('adminName')}}</div>
-			<div class="logout" :style="{color:heads.headLogoutFontColor,fontSize:heads.headLogoutFontSize}" @click="onIndexTap">退出到前台</div>
-            <div class="logout" :style="{color:heads.headLogoutFontColor,fontSize:heads.headLogoutFontSize}" @click="onLogout">退出登录</div>
+      </div>
+      
+      <div class="right-menu flex items-center space-x-6">
+        <div 
+          class="user-info font-medium"
+          :style="{ color: heads.headUserInfoFontColor, fontSize: heads.headUserInfoFontSize }"
+        >
+          {{ $storage.get('role') }} {{ $storage.get('adminName') }}
         </div>
+        
+        <div 
+          class="logout cursor-pointer transition duration-300 hover:text-red-600"
+          :style="{ color: heads.headLogoutFontColor, fontSize: heads.headLogoutFontSize }"
+          @click="onIndexTap"
+        >
+          退出到前台
+        </div>
+        
+        <div 
+          class="logout cursor-pointer transition duration-300 hover:text-red-600"
+          :style="{ color: heads.headLogoutFontColor, fontSize: heads.headLogoutFontSize }"
+          @click="onLogout"
+        >
+          退出登录
+        </div>
+      </div>
     </div>
-</template>
+  </template>
+  
 
 <script>
     export default {

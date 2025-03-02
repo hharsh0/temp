@@ -97,7 +97,7 @@
                                    prop="dicCode"
                                    header-align="center"
                                    label="字段">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             {{scope.row.dicCode}}
                         </template>
                     </el-table-column>
@@ -106,7 +106,7 @@
                                    prop="dicName"
                                    header-align="center"
                                    label="字段名">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             {{scope.row.dicName}}
                         </template>
                     </el-table-column>
@@ -114,7 +114,7 @@
                                       prop="codeIndex"
                                       header-align="center"
                                       label="编码">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             {{scope.row.codeIndex}}
                         </template>
                     </el-table-column>
@@ -123,7 +123,7 @@
                                    prop="indexName"
                                    header-align="center"
                                    label="编码名字">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             {{scope.row.indexName}}
                         </template>
                     </el-table-column>
@@ -132,7 +132,7 @@
                                    prop="beizhu"
                                    header-align="center"
                                    label="备注">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             {{scope.row.beizhu}}
                         </template>
                     </el-table-column>
@@ -140,7 +140,7 @@
                     <el-table-column width="300" :align="contents.tableAlign"
                                      header-align="center"
                                      label="操作">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             <el-button v-if="isAuth('dictionary','查看')" type="success" icon="el-icon-tickets" size="mini" @click="addOrUpdateHandler(scope.row.id,'info')">详情</el-button>
                             <el-button v-if="isAuth('dictionary','修改')" type="primary" icon="el-icon-edit" size="mini" @click="addOrUpdateHandler(scope.row.id)">修改</el-button>
 
@@ -170,7 +170,7 @@
 
 
 
-        <el-dialog title="统计报表" :visible.sync="chartVisiable" width="800">
+        <el-dialog title="统计报表" v-model:visible="chartVisiable" width="800">
             <el-date-picker
                     v-model="echartsDate"
                     type="year"

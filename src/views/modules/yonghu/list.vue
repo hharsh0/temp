@@ -112,7 +112,7 @@
                                    prop="username"
                                    header-align="center"
                                    label="账户">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             {{scope.row.username}}
                         </template>
                     </el-table-column>
@@ -121,7 +121,7 @@
                                    prop="yonghuName"
                                    header-align="center"
                                    label="用户姓名">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             {{scope.row.yonghuName}}
                         </template>
                     </el-table-column>
@@ -129,7 +129,7 @@
                                      header-align="center"
                                      width="200"
                                      label="头像">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             <div v-if="scope.row.yonghuPhoto">
                                 <img :src="scope.row.yonghuPhoto" width="100" height="100">
                             </div>
@@ -141,7 +141,7 @@
                                    prop="yonghuPhone"
                                    header-align="center"
                                    label="手机号">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             {{scope.row.yonghuPhone}}
                         </template>
                     </el-table-column>
@@ -150,7 +150,7 @@
                                    prop="yonghuEmail"
                                    header-align="center"
                                    label="电子邮箱">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             {{scope.row.yonghuEmail}}
                         </template>
                     </el-table-column>
@@ -158,7 +158,7 @@
                                       prop="sexTypes"
                                       header-align="center"
                                       label="性别">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             {{scope.row.sexValue}}
                         </template>
                     </el-table-column>
@@ -166,7 +166,7 @@
                     <el-table-column width="300" :align="contents.tableAlign"
                                      header-align="center"
                                      label="操作">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             <el-button v-if="isAuth('yonghu','查看')" type="success" icon="el-icon-tickets" size="mini" @click="addOrUpdateHandler(scope.row.id,'info')">详情</el-button>
                             <el-button v-if="isAuth('yonghu','修改')" type="primary" icon="el-icon-edit" size="mini" @click="addOrUpdateHandler(scope.row.id)">修改</el-button>
 
@@ -197,7 +197,7 @@
 
 
 
-        <el-dialog title="统计报表" :visible.sync="chartVisiable" width="800">
+        <el-dialog title="统计报表" v-model:visible="chartVisiable" width="800">
             <el-date-picker
                     v-model="echartsDate"
                     type="year"

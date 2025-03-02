@@ -112,7 +112,7 @@
                                    prop="chongwulingyangName"
                                    header-align="center"
                                    label="标题">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             {{scope.row.chongwulingyangName}}
                         </template>
                     </el-table-column>
@@ -120,7 +120,7 @@
                                       prop="chongwuTypes"
                                       header-align="center"
                                       label="宠物类型">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             {{scope.row.chongwuValue}}
                         </template>
                     </el-table-column>
@@ -128,7 +128,7 @@
                                      header-align="center"
                                      width="200"
                                      label="宠物图片">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             <div v-if="scope.row.chongwulingyangPhoto">
                                 <img :src="scope.row.chongwulingyangPhoto" width="100" height="100">
                             </div>
@@ -139,7 +139,7 @@
                                       prop="jieshuTypes"
                                       header-align="center"
                                       label="是否被认领">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             {{scope.row.jieshuValue}}
                         </template>
                     </el-table-column>
@@ -147,7 +147,7 @@
                     <el-table-column width="300" :align="contents.tableAlign"
                                      header-align="center"
                                      label="操作">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             <el-button v-if="isAuth('chongwulingyang','查看')" type="success" icon="el-icon-tickets" size="mini" @click="addOrUpdateHandler(scope.row.id,'info')">详情</el-button>
                             <el-button v-if="isAuth('chongwulingyang','修改')" type="primary" icon="el-icon-edit" size="mini" @click="addOrUpdateHandler(scope.row.id)">修改</el-button>
 
@@ -177,7 +177,7 @@
 
 
 
-        <el-dialog title="统计报表" :visible.sync="chartVisiable" width="800">
+        <el-dialog title="统计报表" v-model:visible="chartVisiable" width="800">
             <el-date-picker
                     v-model="echartsDate"
                     type="year"

@@ -69,7 +69,7 @@
                     prop="name"
                     header-align="center"
 		    label="名称">
-		     <template slot-scope="scope">
+		     <template v-slot="scope">
                        {{scope.row.name}}
                      </template>
                 </el-table-column>
@@ -77,7 +77,7 @@
                     header-align="center"
                     width="200"
                     label="值">
-                    <template slot-scope="scope">
+                    <template v-slot="scope">
                       <div v-if="scope.row.value">
                         <img :src="scope.row.value.split(',')[0]" width="100" height="100">
                       </div>
@@ -87,7 +87,7 @@
             <el-table-column width="300" :align="contents.tableAlign"
                 header-align="center"
                 label="操作">
-                <template slot-scope="scope">
+                <template v-slot="scope">
                 <el-button v-if="isAuth('config','查看') && contents.tableBtnIcon == 1 && contents.tableBtnIconPosition == 1" type="success" icon="el-icon-tickets" size="mini" @click="addOrUpdateHandler(scope.row.id,'info')">{{ contents.tableBtnFont == 1?'详情':'' }}</el-button>
                 <el-button v-if="isAuth('config','查看') && contents.tableBtnIcon == 1 && contents.tableBtnIconPosition == 2" type="success" size="mini" @click="addOrUpdateHandler(scope.row.id,'info')">{{ contents.tableBtnFont == 1?'详情':'' }}<i class="el-icon-tickets el-icon--right" /></el-button>
                 <el-button v-if="isAuth('config','查看') && contents.tableBtnIcon == 0" type="success" size="mini" @click="addOrUpdateHandler(scope.row.id,'info')">{{ contents.tableBtnFont == 1?'详情':'' }}</el-button>

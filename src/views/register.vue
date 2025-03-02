@@ -1,45 +1,54 @@
 <template>
-    <div style="backgroundImage: url('/liulangdongwubeihua/img/back-img-bg.jpg');background-size:cover;">
-        <div class="container">
-            <div class="login-form" style="backgroundColor:rgba(183, 174, 174, 0.5);borderRadius:22px">
-                <h1 class="h1" style="color:#000;fontSize:28px;">流浪动物管理系统注册</h1>
-                <el-form class="rgs-form" label-width="120px">
-                        <el-form-item label="账号" class="input">
-                            <el-input v-model="ruleForm.username" autocomplete="off" placeholder="账号"  />
-                        </el-form-item>
-                        <el-form-item label="密码" class="input">
-                            <el-input type="password" v-model="ruleForm.password" autocomplete="off" show-password/>
-                        </el-form-item>
-                        <el-form-item label="重复密码" class="input">
-                            <el-input type="password" v-model="ruleForm.repetitionPassword" autocomplete="off" show-password/>
-                        </el-form-item>
-                        <el-form-item label="用户姓名" class="input" v-if="tableName=='yonghu'">
-                            <el-input v-model="ruleForm.yonghuName" autocomplete="off" placeholder="用户姓名"  />
-                        </el-form-item>
-                        <el-form-item label="手机号" class="input" v-if="tableName=='yonghu'">
-                            <el-input v-model="ruleForm.yonghuPhone" autocomplete="off" placeholder="手机号"  />
-                        </el-form-item>
-                        <el-form-item label="电子邮箱" class="input" v-if="tableName=='yonghu'">
-                            <el-input v-model="ruleForm.yonghuEmail" autocomplete="off" placeholder="电子邮箱"  />
-                        </el-form-item>
-                        <el-form-item label="自愿者姓名" class="input" v-if="tableName=='ziyuanzhe'">
-                            <el-input v-model="ruleForm.ziyuanzheName" autocomplete="off" placeholder="自愿者姓名"  />
-                        </el-form-item>
-                        <el-form-item label="手机号" class="input" v-if="tableName=='ziyuanzhe'">
-                            <el-input v-model="ruleForm.ziyuanzhePhone" autocomplete="off" placeholder="手机号"  />
-                        </el-form-item>
-                        <el-form-item label="电子邮箱" class="input" v-if="tableName=='ziyuanzhe'">
-                            <el-input v-model="ruleForm.ziyuanzheEmail" autocomplete="off" placeholder="电子邮箱"  />
-                        </el-form-item>
-                        <div style="display: flex;flex-wrap: wrap;width: 100%;justify-content: center;">
-                            <el-button class="btn" type="primary" @click="login()">注册</el-button>
-                            <el-button class="btn close" type="primary" @click="close()">取消</el-button>
-                        </div>
-                </el-form>
-            </div>
-        </div>
+    <div class="flex justify-center items-center min-h-screen bg-cover bg-center" style="background-image: url('/liulangdongwubeihua/img/back-img-bg.jpg');">
+      <div class="w-full max-w-md p-8 space-y-6 bg-white bg-opacity-70 shadow-lg rounded-lg">
+        <h1 class="text-2xl font-bold text-center text-black">流浪动物管理系统注册</h1>
+        
+        <el-form class="space-y-4" label-width="120px">
+          <el-form-item label="账号">
+            <el-input v-model="ruleForm.username" autocomplete="off" placeholder="账号" />
+          </el-form-item>
+  
+          <el-form-item label="密码">
+            <el-input type="password" v-model="ruleForm.password" autocomplete="off" show-password />
+          </el-form-item>
+  
+          <el-form-item label="重复密码">
+            <el-input type="password" v-model="ruleForm.repetitionPassword" autocomplete="off" show-password />
+          </el-form-item>
+  
+          <el-form-item label="用户姓名" v-if="tableName=='yonghu'">
+            <el-input v-model="ruleForm.yonghuName" autocomplete="off" placeholder="用户姓名" />
+          </el-form-item>
+  
+          <el-form-item label="手机号" v-if="tableName=='yonghu'">
+            <el-input v-model="ruleForm.yonghuPhone" autocomplete="off" placeholder="手机号" />
+          </el-form-item>
+  
+          <el-form-item label="电子邮箱" v-if="tableName=='yonghu'">
+            <el-input v-model="ruleForm.yonghuEmail" autocomplete="off" placeholder="电子邮箱" />
+          </el-form-item>
+  
+          <el-form-item label="自愿者姓名" v-if="tableName=='ziyuanzhe'">
+            <el-input v-model="ruleForm.ziyuanzheName" autocomplete="off" placeholder="自愿者姓名" />
+          </el-form-item>
+  
+          <el-form-item label="手机号" v-if="tableName=='ziyuanzhe'">
+            <el-input v-model="ruleForm.ziyuanzhePhone" autocomplete="off" placeholder="手机号" />
+          </el-form-item>
+  
+          <el-form-item label="电子邮箱" v-if="tableName=='ziyuanzhe'">
+            <el-input v-model="ruleForm.ziyuanzheEmail" autocomplete="off" placeholder="电子邮箱" />
+          </el-form-item>
+  
+          <div class="flex justify-center space-x-4">
+            <el-button type="primary" class="px-6 py-2 rounded-md bg-blue-500 text-white font-semibold hover:bg-blue-600" @click="login()">注册</el-button>
+            <el-button type="primary" class="px-6 py-2 rounded-md bg-gray-500 text-white font-semibold hover:bg-gray-600" @click="close()">取消</el-button>
+          </div>
+        </el-form>
+      </div>
     </div>
-</template>
+  </template>
+  
 <script>
     export default {
         data() {

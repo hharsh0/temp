@@ -1,6 +1,6 @@
 <template>
   <el-submenu v-if="menu.list && menu.list.length >= 1" :index="menu.menuId + ''">
-    <template slot="title">
+    <template v-slot:title>
       <span>{{ menu.name }}</span>
     </template>
     <sub-menu

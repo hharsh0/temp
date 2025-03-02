@@ -19,7 +19,7 @@
       <i class="el-icon-plus"></i>
       <div slot="tip" class="el-upload__tip" style="color:#838fa1;">{{tip}}</div>
     </el-upload>
-    <el-dialog :visible.sync="dialogVisible" size="tiny" append-to-body>
+    <el-dialog v-model:visible="dialogVisible" size="tiny" append-to-body>
       <img width="100%" :src="dialogImageUrl" alt>
     </el-dialog>
   </div>

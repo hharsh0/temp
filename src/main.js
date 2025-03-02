@@ -1,3 +1,7 @@
+// import { createApp } from 'vue'
+// import App from './App.vue'
+
+// createApp(App).mount('#app')
 
 /* eslint-disable */
 import { createApp } from 'vue';
@@ -23,6 +27,7 @@ import JsonExcel from 'vue-json-excel';
 import VueQr from 'vue-qr';
 import printJS from 'print-js';
 import md5 from 'js-md5';
+import  "../src/assets/tailwind.css"
 
 // Initialize Vue App
 const app = createApp(App);

@@ -1,53 +1,35 @@
 <template>
-    <div>
-        <div class="container loginIn" style="backgroundImage: url(/liulangdongwubeihua/img/back-img-bg.jpg)">
-
-            <div :class="2 == 1 ? 'left' : 2 == 2 ? 'left center' : 'left right'"
-                style="backgroundColor: rgba(225, 225, 225, 1)">
-                <el-form class="login-form" label-position="left" :label-width="3 == 3 ? '56px' : '0px'">
-                    <div class="title-container">
-                        <h3 class="title" style="color: rgba(255, 69, 0, 1)">流浪动物管理系统</h3>
-                    </div>
-                    <el-form-item :label="3 == 3 ? '用户名' : ''" :class="'style' + 3">
-                        <span v-if="3 != 3" class="svg-container"
-                            style="color:rgba(255, 69, 0, 1);line-height:50px"><svg-icon icon-class="user" /></span>
-                        <el-input placeholder="请输入用户名" name="username" type="text" v-model="rulesForm.username" />
-                    </el-form-item>
-                    <el-form-item :label="3 == 3 ? '密码' : ''" :class="'style' + 3">
-                        <span v-if="3 != 3" class="svg-container"
-                            style="color:rgba(255, 69, 0, 1);line-height:50px"><svg-icon icon-class="password" /></span>
-                        <el-input placeholder="请输入密码" name="password" type="password" v-model="rulesForm.password" />
-                    </el-form-item>
-                    <el-form-item v-if="0 == '1'" class="code" :label="3 == 3 ? '验证码' : ''" :class="'style' + 3">
-                        <span v-if="3 != 3" class="svg-container"
-                            style="color:rgba(255, 69, 0, 1);line-height:50px"><svg-icon icon-class="code" /></span>
-                        <el-input placeholder="请输入验证码" name="code" type="text" v-model="rulesForm.code" />
-                        <div class="getCodeBt" @click="getRandCode(4)" style="height:50px;line-height:50px">
-                            <span v-for="(item, index) in codes" :key="index"
-                                :style="{ color: item.color, transform: item.rotate, fontSize: item.size }">{{ item.num
-                                }}</span>
-                        </div>
-                    </el-form-item>
-                    <el-form-item label="角色" prop="loginInRole" class="role">
-                        <el-radio v-for="item in filteredMenus" :key="item.roleName" v-model="rulesForm.role"
-                            :label="item.roleName">
-                            {{ item.roleName }}
-                        </el-radio>
-                    </el-form-item>
-                    <el-button type="primary" @click="login()" class="loginInBt"
-                        style="padding:0;font-size:16px;border-radius:15px;height:44px;line-height:44px;width:100%;backgroundColor:rgba(255, 69, 0, 1); borderColor:rgba(255, 69, 0, 1); color:rgba(255, 255, 255, 1)">{{
-                            '登录' }}</el-button>
-                    <el-form-item class="setting">
-                        <div style="color:rgba(25, 169, 123, 1)" class="register" @click="register('yonghu')">用户注册</div>
-                        <div style="color:rgba(25, 169, 123, 1)" class="register" @click="register('ziyuanzhe')">自愿者注册
-                        </div>
-                    </el-form-item>
-                </el-form>
-            </div>
-
+    <div class="flex justify-center items-center min-h-screen bg-gray-100">
+      <div class="w-full max-w-md p-8 space-y-6 bg-white shadow-lg rounded-lg">
+        <h3 class="text-2xl font-bold text-center text-orange-500">流浪动物管理系统</h3>
+        
+        <el-form class="space-y-4" label-position="left" label-width="56px">
+          <el-form-item label="用户名">
+            <el-input placeholder="请输入用户名" v-model="rulesForm.username" />
+          </el-form-item>
+  
+          <el-form-item label="密码">
+            <el-input placeholder="请输入密码" type="password" v-model="rulesForm.password" />
+          </el-form-item>
+  
+          <el-form-item label="角色" prop="loginInRole">
+            <el-radio v-for="item in filteredMenus" :key="item.roleName" v-model="rulesForm.role" :label="item.roleName">
+              {{ item.roleName }}
+            </el-radio>
+          </el-form-item>
+          
+          <el-button type="primary" @click="login" class="w-full py-2 rounded-md bg-orange-500 text-white font-semibold hover:bg-orange-600">
+            登录
+          </el-button>
+        </el-form>
+  
+        <div class="flex justify-between text-sm text-green-500">
+          <span class="cursor-pointer" @click="register('yonghu')">用户注册</span>
+          <span class="cursor-pointer" @click="register('ziyuanzhe')">自愿者注册</span>
         </div>
+      </div>
     </div>
-</template>
+  </template>
 <script>
 import menu from "@/utils/menu";
 export default {

@@ -101,7 +101,7 @@
                                       prop="chongwuName"
                                       header-align="center"
                                       label="宠物名称">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             {{scope.row.chongwuName}}
                         </template>
                     </el-table-column>
@@ -109,7 +109,7 @@
                                       prop="yonghuName"
                                       header-align="center"
                                       label="用户姓名">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             {{scope.row.yonghuName}}
                         </template>
                     </el-table-column>
@@ -117,7 +117,7 @@
                                       prop="chongwuLiuyanText"
                                       header-align="center"
                                       label="留言内容">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             <span v-if="scope.row.chongwuLiuyanText != null &&scope.row.chongwuLiuyanText.length>10">
                                 {{scope.row.chongwuLiuyanText.slice(0,10)}}...
                             </span>
@@ -131,7 +131,7 @@
                                    prop="insertTime"
                                    header-align="center"
                                    label="留言时间">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             {{scope.row.insertTime}}
                         </template>
                     </el-table-column>
@@ -139,7 +139,7 @@
                                       prop="replyText"
                                       header-align="center"
                                       label="回复内容">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             <span v-if="scope.row.replyText != null &&scope.row.replyText.length>10">
                                 {{scope.row.replyText.slice(0,10)}}...
                             </span>
@@ -153,7 +153,7 @@
                                    prop="updateTime"
                                    header-align="center"
                                    label="回复时间">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             {{scope.row.updateTime}}
                         </template>
                     </el-table-column>
@@ -161,7 +161,7 @@
                     <el-table-column width="300" :align="contents.tableAlign"
                                      header-align="center"
                                      label="操作">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             <el-button v-if="isAuth('chongwuLiuyan','查看')" type="success" icon="el-icon-tickets" size="mini" @click="addOrUpdateHandler(scope.row.id,'info')">详情</el-button>
                             <el-button v-if="isAuth('chongwuLiuyan','修改') " type="primary" icon="el-icon-edit" size="mini" @click="addOrUpdateHandler(scope.row.id)">回复</el-button>
 
@@ -191,7 +191,7 @@
 
 
 
-        <el-dialog title="统计报表" :visible.sync="chartVisiable" width="800">
+        <el-dialog title="统计报表" v-model:visible="chartVisiable" width="800">
             <el-date-picker
                     v-model="echartsDate"
                     type="year"

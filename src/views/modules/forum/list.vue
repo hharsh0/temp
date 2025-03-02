@@ -1,10 +1,10 @@
 <template>
     <div class="main-content">
-        <el-dialog title="帖子回复详情" :visible.sync="forumReplyDialogVisible">
+        <el-dialog title="帖子回复详情" v-model:visible="forumReplyDialogVisible">
             <el-dialog
                     width="30%"
                     :title="forumReplyInfoContent"
-                    :visible.sync="forumReplyInfoDialogVisible"
+                    v-model:visible="forumReplyInfoDialogVisible"
                     append-to-body>
             </el-dialog>
             <div class="demo-input-suffix">
@@ -16,7 +16,7 @@
             <el-table :data="forumData" height="250">
                 <!--<el-table-column label="id" width="40"></el-table-column>-->
                 <el-table-column label="身份">
-                    <template slot-scope="scope">
+                    <template v-slot="scope">
                         <span v-if="scope.row.yonghuId">
                             用户
                         </span>
@@ -29,7 +29,7 @@
                     </template>
                 </el-table-column>
                 <el-table-column label="姓名">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                         <span v-if="scope.row.yonghuId">
                             {{scope.row.yonghuName}}
                         </span>
@@ -42,7 +42,7 @@
                     </template>
                 </el-table-column>
                 <el-table-column label="手机号">
-                    <template slot-scope="scope">
+                    <template v-slot="scope">
                         <span v-if="scope.row.yonghuId">
                             {{scope.row.yonghuPhone}}
                         </span>
@@ -55,13 +55,13 @@
                     </template>
                 </el-table-column>
                 <el-table-column label="回复内容">
-                    <template slot-scope="scope">
+                    <template v-slot="scope">
                         {{scope.row.forumContent.length>20?(scope.row.forumContent.substring(0,20)+'...'):scope.row.forumContent}}
                     </template>
                 </el-table-column>
                 <el-table-column property="insertTime" label="回帖时间"></el-table-column>
                 <el-table-column property="caozuo" label="操作">
-                    <template slot-scope="scope">
+                    <template v-slot="scope">
                         <el-button type="info"                          @click="seeForumContent(scope.row.forumContent)">回帖详情</el-button>
                             <el-button v-if="true &&( false|| (sessionTable == 'yonghu' && scope.row.yonghuId ==userId)
 || (sessionTable == 'ziyuanzhe' && scope.row.ziyuanzheId ==userId)
@@ -167,7 +167,7 @@
                     <el-table-column  :sortable="contents.tableSortable" :align="contents.tableAlign"
                                       header-align="center"
                                       label="身份">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             <span v-if="scope.row.yonghuId">
                                 用户
                             </span>
@@ -182,7 +182,7 @@
                     <el-table-column  :sortable="contents.tableSortable" :align="contents.tableAlign"
                                       header-align="center"
                                       label="姓名">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             <span v-if="scope.row.yonghuId">
                                 {{scope.row.yonghuName}}
                             </span>
@@ -197,7 +197,7 @@
                     <el-table-column  :sortable="contents.tableSortable" :align="contents.tableAlign"
                                       header-align="center"
                                       label="手机号">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             <span v-if="scope.row.yonghuId">
                                 {{scope.row.yonghuPhone}}
                             </span>
@@ -212,7 +212,7 @@
                     <el-table-column  :sortable="contents.tableSortable" :align="contents.tableAlign"
                                       header-align="center"
                                       label="头像">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             <span v-if="scope.row.yonghuId">
                                 <div v-if="scope.row.yonghuPhoto">
                                     <img :src="scope.row.yonghuPhoto" width="100" height="100">
@@ -234,7 +234,7 @@
                                       prop="forumName"
                                       header-align="center"
                                       label="帖子标题">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             {{scope.row.forumName}}
                         </template>
                     </el-table-column>
@@ -242,7 +242,7 @@
                                       prop="forumContent"
                                       header-align="center"
                                       label="帖子内容">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             {{scope.row.forumContent.length>20?(scope.row.forumContent.substring(0,20)+'...'):scope.row.forumContent}}
                         </template>
                     </el-table-column>
@@ -250,7 +250,7 @@
                       prop="insertTime"
                       header-align="center"
                       label="发帖时间">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             {{scope.row.insertTime}}
                         </template>
                     </el-table-column>
@@ -258,7 +258,7 @@
                     <el-table-column width="300" :align="contents.tableAlign"
                                      header-align="center"
                                      label="操作">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             <el-button v-if="isAuth('forum','查看')" type="success" icon="el-icon-tickets" size="mini" @click="addOrUpdateHandler(scope.row.id,'info')">详情</el-button>
                             <el-button v-if="isAuth('forum','查看')" type="primary" icon="el-icon-edit" size="mini" @click="openReplyForum(scope.row.id,scope.row.forumName,scope.row.forumContent)">查看论坛回复</el-button>
                             <el-button v-if="isAuth('forum','修改')" type="primary" icon="el-icon-edit" size="mini" @click="addOrUpdateHandler(scope.row.id)">修改</el-button>
@@ -292,7 +292,7 @@
 
 
 
-        <el-dialog title="统计报表" :visible.sync="chartVisiable" width="800">
+        <el-dialog title="统计报表" v-model:visible="chartVisiable" width="800">
             <el-date-picker
                     v-model="echartsDate"
                     type="year"

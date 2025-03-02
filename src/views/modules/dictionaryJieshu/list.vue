@@ -53,7 +53,7 @@
                                       prop="codeIndex"
                                       header-align="center"
                                       label="是否被认领编码">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             {{scope.row.codeIndex}}
                         </template>
                     </el-table-column>
@@ -61,7 +61,7 @@
                                       prop="indexName"
                                       header-align="center"
                                       label="是否被认领名称">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             {{scope.row.indexName}}
                         </template>
                     </el-table-column>
@@ -76,7 +76,7 @@
                     <el-table-column width="300" :align="contents.tableAlign"
                                      header-align="center"
                                      label="操作">
-                        <template slot-scope="scope">
+                        <template v-slot="scope">
                             <el-button v-if="isAuth('dictionaryJieshu','查看')" type="success" icon="el-icon-tickets" size="mini" @click="addOrUpdateHandler(scope.row.id,'info')">详情</el-button>
                             <el-button v-if="isAuth('dictionaryJieshu','修改')" type="primary" icon="el-icon-edit" size="mini" @click="addOrUpdateHandler(scope.row.id)">修改</el-button>
                             <el-button v-if="isAuth('dictionaryJieshu','删除')" type="danger" icon="el-icon-delete" size="mini" @click="deleteHandler(scope.row.id)">删除</el-button>
