@@ -31,6 +31,8 @@ export default {
   mounted() {
     // 获取动态菜单数据并且渲染
     this.menuList = JSON.parse(sessionStorage.getItem("menuList") || "[]");
+    console.log("hello");
+    console.log(JSON.parse(sessionStorage.getItem("menuList") || "[]"));
     this.dynamicMenuRoutes = JSON.parse(
       sessionStorage.getItem("dynamicMenuRoutes") || "[]"
     );
