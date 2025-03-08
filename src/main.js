@@ -37,7 +37,9 @@ app.use(router);
 app.use(ElementPlus, { size: 'medium', zIndex: 3000 });
 
 // const BASE_URL = "http://localhost:8080/liulangdongwubeihua";
-const BASE_URL = "http://68.183.81.14:8080/liulangdongwubeihua";
+// const BASE_URL = "http://68.183.81.14:8080/liulangdongwubeihua";
+const BASE_URL = "https://zbairyli27.duckdns.org/liulangdongwubeihua";
+
 
 // Setup Global Properties
 app.config.globalProperties.$validate = validate;
