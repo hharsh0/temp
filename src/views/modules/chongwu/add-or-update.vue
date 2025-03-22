@@ -43,9 +43,9 @@
                         <el-select v-model="ruleForm.chongwuTypes" :disabled="ro.chongwuTypes" placeholder="请选择宠物类型">
                             <el-option
                                 v-for="(item,index) in chongwuTypesOptions"
-                                v-bind:key="item.codeIndex"
-                                :label="item.indexName"
-                                :value="item.codeIndex">
+                                v-bind:key="item?.codeIndex"
+                                :label="item?.indexName"
+                                :value="item?.codeIndex">
                             </el-option>
                         </el-select>
                     </el-form-item>
@@ -146,7 +146,7 @@
                     method: "get"
                 }).then(({ data }) => {
                     if (data && data.code === 0) {
-                        this.chongwuTypesOptions = data.data.list;
+                        this.chongwuTypesOptions = data?.data?.list;
                     }
                 });
 

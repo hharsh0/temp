@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@vuemap/vue-amap": "^2.1.9",
+    "@vueup/vue-quill": "^1.2.0",
     "autoprefixer": "^10",
     "axios": "^1.8.1",
     "core-js": "^3.8.3",
@@ -23,7 +24,6 @@
     "vue-amap": "^0.5.10",
     "vue-json-excel": "^0.3.0",
     "vue-qr": "^4.0.9",
-    "vue-quill-editor": "^3.0.6",
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
