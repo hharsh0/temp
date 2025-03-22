@@ -30,6 +30,7 @@ export default {
   },
   mounted() {
     // 获取动态菜单数据并且渲染
+    console.log("hello");
     this.menuList = JSON.parse(sessionStorage.getItem("menuList") || "[]");
     console.log("hello");
     console.log(JSON.parse(sessionStorage.getItem("menuList") || "[]"));

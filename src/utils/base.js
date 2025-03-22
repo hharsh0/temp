@@ -4,7 +4,7 @@ const base = {
             url : "http://localhost:8080/liulangdongwubeihua/",
             name: "liulangdongwubeihua",
             // 退出到首页链接
-            indexUrl: 'https://zbairyli27.duckdns.org/liulangdongwubeihua/front/index.html'
+            indexUrl: 'http://localhost:8080/liulangdongwubeihua/front/index.html'
         };
     },
     getProjectName(){

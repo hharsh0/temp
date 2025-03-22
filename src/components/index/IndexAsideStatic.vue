@@ -1,33 +1,44 @@
 <template>
   <el-aside class="index-aside" height="100vh" width="210px">
-    <div class="index-aside-inner menulist" style="height:100%">
-      <div v-for="item in menuList" :key="item?.roleName" v-if="role==item?.roleName" class="menulist-item" style="height:100%;broder:0;background-color:#5E5B5B">
-        <div class="menulistImg" style="backgroundColor:#ff0000;padding:25px 0" v-if="false && menulistStyle == 'vertical'">
-          <el-image v-if="'http://codegen.caihongy.cn/20201021/cc7d45d9c8164b58b18351764eba9be1.jpg'" src="http://codegen.caihongy.cn/20201021/cc7d45d9c8164b58b18351764eba9be1.jpg" fit="cover" />
-        </div>
-        <el-menu mode="horizontal" :unique-opened="true" class="el-menu-demo" style="height:100%;" background-color="#5E5B5B" text-color="#ffffff" active-text-color="#E8C66F" default-active="0">
-          <el-menu-item index="(0).toString()" :style="menulistBorderBottom" @click="menuHandler('')"><i v-if="true" class="el-icon-s-home" />首页</el-menu-item>
-          <el-submenu :index="(1).toString()" :style="menulistBorderBottom">
-            <template v-slot:title>
-              <i v-if="true" class="el-icon-user-solid" />
-              <span>个人中心</span>
-            </template>
-            <el-menu-item :index="(1-2).toString()" @click="menuHandler('updatePassword')">修改密码</el-menu-item>
-            <el-menu-item :index="(1-2).toString()" @click="menuHandler('center')">个人信息</el-menu-item>
-          </el-submenu>
-          <el-submenu :style="menulistBorderBottom" v-for=" (menu,index) in item.backMenu" :key="menu.menu" :index="(index+2).toString()">
-            <template v-slot:title>
-              <i v-if="true" :class="icons[index]" />
-              <span>{{ menu.menu }}</span>
-            </template>
-            <el-menu-item v-for=" (child,sort) in menu.child" :key="sort" :index="((index+2)+'-'+sort).toString()" @click="menuHandler(child.tableName)">{{ child.menu }}</el-menu-item>
-          </el-submenu>
-        </el-menu>
+    <div class="index-aside-inner menulist" style="height: 100%">
+      <template v-for="item in menuList" :key="item?.roleName">
+        <div v-if="role === item?.roleName" class="menulist-item" style="height: 100%; border: 0; background-color: #5E5B5B">
+          <!-- Logo Section -->
+          <div class="menulistImg" v-if="false && menulistStyle === 'vertical'" style="background-color: #ff0000; padding: 25px 0">
+            <el-image src="http://codegen.caihongy.cn/20201021/cc7d45d9c8164b58b18351764eba9be1.jpg" fit="cover" />
+          </div>
 
-      </div>
+          <!-- Sidebar Menu -->
+          <el-menu mode="horizontal" :unique-opened="true" class="el-menu-demo" style="height: 100%" background-color="#5E5B5B" text-color="#ffffff" active-text-color="#E8C66F" default-active="0">
+            <el-menu-item index="0" :style="menulistBorderBottom" @click="menuHandler('')">
+              <i class="el-icon-s-home" /> 首页
+            </el-menu-item>
+
+            <el-submenu index="1" :style="menulistBorderBottom">
+              <template #title>
+                <i class="el-icon-user-solid" />
+                <span>个人中心</span>
+              </template>
+              <el-menu-item index="1-1" @click="menuHandler('updatePassword')">修改密码</el-menu-item>
+              <el-menu-item index="1-2" @click="menuHandler('center')">个人信息</el-menu-item>
+            </el-submenu>
+
+            <el-submenu v-for="(menu, index) in item.backMenu" :key="menu.menu" :index="(index + 2).toString()" :style="menulistBorderBottom">
+              <template #title>
+                <i :class="icons[index]" />
+                <span>{{ menu.menu }}</span>
+              </template>
+              <el-menu-item v-for="(child, sort) in menu.child" :key="child.tableName" :index="`${index + 2}-${sort}`" @click="menuHandler(child.tableName)">
+                {{ child.menu }}
+              </el-menu-item>
+            </el-submenu>
+          </el-menu>
+        </div>
+      </template>
     </div>
   </el-aside>
 </template>
+
 <script>
 import menu from '@/utils/menu'
 export default {
@@ -83,6 +94,7 @@ export default {
   },
   mounted() {
     const menus = menu.list()
+    console.log(menus)
     this.menuList = menus
     this.role = this.$storage.get('role')
   },

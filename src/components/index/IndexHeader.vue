@@ -75,6 +75,7 @@
         },
         mounted() {
             let sessionTable = this.$storage.get("sessionTable")
+            console.log("1234")
             this.$http({
                 url: `${this.$baseURL}/${sessionTable}/session`,
                 method: "get"
