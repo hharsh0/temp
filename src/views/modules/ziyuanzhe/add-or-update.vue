@@ -237,6 +237,7 @@
             // 多级联动参数
             info(id) {
                 let _this =this;
+                console.log(id);
                 _this.$http({
                     url: `${this.$baseURL}/ziyuanzhe/info/${id}`,
                     method: 'get'

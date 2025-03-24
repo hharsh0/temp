@@ -205,6 +205,7 @@
                 });
             },
             yonghuChange(id){
+                console.log("test",id);
                 this.$http({
                     url: `${this.$baseURL}/yonghu/info/`+id,
                     method: "get"
@@ -215,8 +216,9 @@
                 });
             },
             ziyuanzheChange(id){
+                console.log("1", id);
                 this.$http({
-                    url: `${this.$baseURL}/ziyuanzhe/info/`+id,
+                    url: `${this.$baseURL}/ziyuanzhe/info/${id}`,
                     method: "get"
                 }).then(({ data }) => {
                     if (data && data.code === 0) {
@@ -226,6 +228,7 @@
             },
             // 多级联动参数
             info(id) {
+                console.log("info", id);
                 let _this =this;
                 _this.$http({
                     url: `${this.$baseURL}/forum/info/${id}`,
@@ -233,6 +236,7 @@
                 }).then(({ data }) => {
                     if (data && data.code === 0) {
                         _this.ruleForm = data.data;
+                        console.log(data.data);
                         _this.yonghuChange(data.data.yonghuId)
                         _this.ziyuanzheChange(data.data.ziyuanzheId)
                     } else {

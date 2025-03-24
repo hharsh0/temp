@@ -441,7 +441,17 @@ export default {
           } else {
             this.$message.error(data.msg);
           }
-        });
+        }).catch((err) => {
+                    if (err !== "cancel") {
+                        console.error("删除操作失败:", err);
+                        this.$message.error("删除操作失败");
+                    } else {
+                        this.$message({
+                            type: "info",
+                            message: "操作已取消"
+                        });
+                    }
+                });
       });
     },
   }

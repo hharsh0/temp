@@ -42,7 +42,6 @@ const toolbarOptions = [
   ["link", "image", "video"] // 链接、图片、视频
 ];
 
-// import { quillEditor } from "vue-quill-editor";
 import { QuillEditor } from '@vueup/vue-quill';
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
