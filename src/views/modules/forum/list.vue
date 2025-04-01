@@ -55,7 +55,8 @@
                 </el-table-column>
                 <el-table-column label="回复内容">
                     <template v-slot="scope">
-                        {{ scope.row.forumContent.length > 20 ? (scope.row.forumContent.substring(0, 20) + '...') : scope.row.forumContent }}
+                        {{ scope.row.forumContent.length > 20 ? (scope.row.forumContent.substring(0, 20) + '...') :
+                        scope.row.forumContent }}
                     </template>
                 </el-table-column>
                 <el-table-column property="insertTime" label="回帖时间"></el-table-column>
@@ -217,7 +218,8 @@
                     <el-table-column :sortable="contents.tableSortable" :align="contents.tableAlign" prop="forumContent"
                         header-align="center" label="帖子内容">
                         <template v-slot="scope">
-                            {{ scope.row.forumContent.length > 20 ? (scope.row.forumContent.substring(0, 20) + '...') : scope.row.forumContent }}
+                            {{ scope.row.forumContent.length > 20 ? (scope.row.forumContent.substring(0, 20) + '...') :
+                            scope.row.forumContent }}
                         </template>
                     </el-table-column>
                     <el-table-column :sortable="contents.tableSortable" :align="contents.tableAlign" prop="insertTime"
@@ -795,9 +797,18 @@ export default {
         },
         // 删除
         deleteHandler(id) {
+            
+            // Ensure ids array is correctly populated
             var ids = id ? [Number(id)] : this.dataListSelections.map(item => Number(item.id));
 
-            this.$confirm(`确定进行[${id ? "删除" : "批量删除"}]操作?`, "提示", {
+            // Check if there are valid IDs before proceeding
+            if (!ids.length || ids.some(isNaN)) {
+                this.$message.error("未找到有效的 ID，删除操作取消");
+                return;
+            }
+
+            // Confirmation dialog
+            this.$confirm(`确定进行 [${id ? "删除" : "批量删除"}] 操作?`, "提示", {
                 confirmButtonText: "确定",
                 cancelButtonText: "取消",
                 type: "warning"
@@ -806,22 +817,22 @@ export default {
                     return this.$http({
                         url: `${this.$baseURL}/forum/delete`,
                         method: "post",
-                        data: ids
+                        data: { ids } // Send IDs as an object (adjust if API expects an array)
                     });
                 })
                 .then(({ data }) => {
                     if (data && data.code === 0) {
                         this.$message({
-                            message: "操作成功",
+                            message: "删除成功",
                             type: "success",
                             duration: 1500,
                             onClose: () => {
                                 this.forumReplyDialogVisible = false;
-                                this.search();
+                                this.search(); // Refresh data after deletion
                             }
                         });
                     } else {
-                        this.$message.error(data.msg);
+                        this.$message.error(data.msg || "删除失败");
                     }
                 })
                 .catch((err) => {
@@ -835,7 +846,8 @@ export default {
                         });
                     }
                 });
-        },
+        }
+        ,
 
         // 导入功能上传文件成功后调用导入方法
         forumUploadSuccess(data) {

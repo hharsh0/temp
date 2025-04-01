@@ -120,7 +120,6 @@ export default {
     this.role = this.$storage.get("role");
     if (this.role != "管理员"){
     }
-
     this.flag = table;
     this.$http({
       url: `${this.$baseURL}/${this.$storage.get("sessionTable")}/session`,
@@ -139,7 +138,7 @@ export default {
 // 注册表 自愿者 的级联表
 
       this.$http({
-          url: `${this.baseURL}/dictionary/page?page=1&limit=100&sort=&order=&dicCode=sex_types`,
+          url: `${this.$baseURL}/dictionary/page?page=1&limit=100&sort=&order=&dicCode=sex_types`,
           method: "get"
       }).then(({ data }) => {
           if (data && data.code === 0) {

@@ -1,6 +1,6 @@
 <template>
     <div class="main-content">
-        <el-dialog title="审核" v-model:visible="chongwulingyangshenheYesnoTypesVisible">
+        <el-dialog title="审核" v-model="chongwulingyangshenheYesnoTypesVisible">
             <el-form :model="form">
                 <input type="hidden" v-model="form.id">
                 <el-form-item label="审核" >
@@ -830,6 +830,7 @@
             },
             openYesnoTypes(id,chongwulingyangId) {
                 let _this = this;
+                console.log("Test 1");
                 _this.form.id = null;
                 _this.form.id = id;
                 _this.form.chongwulingyangId = null;

@@ -3,66 +3,48 @@
         <!-- 列表页 -->
         <div v-if="showFlag">
             <el-form :inline="true" :model="searchForm" class="form-content">
-                <el-row :gutter="20" class="slt" :style="{justifyContent:contents.searchBoxPosition=='1'?'flex-start':contents.searchBoxPosition=='2'?'center':'flex-end'}">
+                <el-row :gutter="20" class="slt"
+                    :style="{ justifyContent: contents.searchBoxPosition == '1' ? 'flex-start' : contents.searchBoxPosition == '2' ? 'center' : 'flex-end' }">
                     <el-form-item label="宠物类型">
-                        <el-input prefix-icon="el-icon-search" v-model="searchForm.indexNameSearch" placeholder="宠物类型" clearable></el-input>
+                        <el-input prefix-icon="el-icon-search" v-model="searchForm.indexNameSearch" placeholder="宠物类型"
+                            clearable></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button icon="el-icon-search" type="success" @click="search()">查询</el-button>
                     </el-form-item>
                 </el-row>
-                <el-row class="ad" :style="{justifyContent:contents.btnAdAllBoxPosition=='1'?'flex-start':contents.btnAdAllBoxPosition=='2'?'center':'flex-end'}">
+                <el-row class="ad"
+                    :style="{ justifyContent: contents.btnAdAllBoxPosition == '1' ? 'flex-start' : contents.btnAdAllBoxPosition == '2' ? 'center' : 'flex-end' }">
                     <el-form-item>
-                        <el-button
-                                v-if="isAuth('dictionaryChongwu','新增')"
-                                type="success"
-                                icon="el-icon-plus"
-                                @click="addOrUpdateHandler()"
-                        >新增</el-button>
-                        <el-button
-                                v-if="isAuth('dictionaryChongwu','删除')"
-                                :disabled="dataListSelections.length <= 0"
-                                type="danger"
-                                icon="el-icon-delete"
-                                @click="deleteHandler()"
-                        >删除</el-button>
+                        <el-button v-if="isAuth('dictionaryChongwu', '新增')" type="success" icon="el-icon-plus"
+                            @click="addOrUpdateHandler()">新增</el-button>
+                        <el-button v-if="isAuth('dictionaryChongwu', '删除')" :disabled="dataListSelections.length <= 0"
+                            type="danger" icon="el-icon-delete" @click="deleteHandler()">删除</el-button>
                     </el-form-item>
                 </el-row>
             </el-form>
             <div class="table-content">
                 <el-table class="tables" :size="contents.tableSize" :show-header="contents.tableShowHeader"
-                          :header-row-style="headerRowStyle" :header-cell-style="headerCellStyle"
-                          :border="contents.tableBorder"
-                          :fit="contents.tableFit"
-                          :stripe="contents.tableStripe"
-                          :row-style="rowStyle"
-                          :cell-style="cellStyle"
-                          :style="{width: '100%',fontSize:contents.tableContentFontSize,color:contents.tableContentFontColor}"
-                          v-if="isAuth('dictionaryChongwu','查看')"
-                          :data="dataList"
-                          v-loading="dataListLoading"
-                          @selection-change="selectionChangeHandler">
-                    <el-table-column  v-if="contents.tableSelection"
-                                      type="selection"
-                                      header-align="center"
-                                      align="center"
-                                      width="50">
+                    :header-row-style="headerRowStyle" :header-cell-style="headerCellStyle"
+                    :border="contents.tableBorder" :fit="contents.tableFit" :stripe="contents.tableStripe"
+                    :row-style="rowStyle" :cell-style="cellStyle"
+                    :style="{ width: '100%', fontSize: contents.tableContentFontSize, color: contents.tableContentFontColor }"
+                    v-if="isAuth('dictionaryChongwu', '查看')" :data="dataList" v-loading="dataListLoading"
+                    @selection-change="selectionChangeHandler">
+                    <el-table-column v-if="contents.tableSelection" type="selection" header-align="center"
+                        align="center" width="50">
                     </el-table-column>
                     <el-table-column label="索引" v-if="contents.tableIndex" type="index" width="50" />
-                    <el-table-column  :sortable="contents.tableSortable" :align="contents.tableAlign"
-                                      prop="codeIndex"
-                                      header-align="center"
-                                      label="宠物类型编码">
+                    <el-table-column :sortable="contents.tableSortable" :align="contents.tableAlign" prop="codeIndex"
+                        header-align="center" label="宠物类型编码">
                         <template v-slot="scope">
-                            {{scope.row.codeIndex}}
+                            {{ scope.row.codeIndex }}
                         </template>
                     </el-table-column>
-                    <el-table-column  :sortable="contents.tableSortable" :align="contents.tableAlign"
-                                      prop="indexName"
-                                      header-align="center"
-                                      label="宠物类型名称">
+                    <el-table-column :sortable="contents.tableSortable" :align="contents.tableAlign" prop="indexName"
+                        header-align="center" label="宠物类型名称">
                         <template v-slot="scope">
-                            {{scope.row.indexName}}
+                            {{ scope.row.indexName }}
                         </template>
                     </el-table-column>
                     <!--<el-table-column  :sortable="contents.tableSortable" :align="contents.tableAlign"
@@ -73,30 +55,22 @@
                             {{scope.row.beizhu}}
                         </template>
                     </el-table-column>-->
-                    <el-table-column width="300" :align="contents.tableAlign"
-                                     header-align="center"
-                                     label="操作">
+                    <el-table-column width="300" :align="contents.tableAlign" header-align="center" label="操作">
                         <template v-slot="scope">
-                            <el-button v-if="isAuth('dictionaryChongwu','查看')" type="success" icon="el-icon-tickets" size="mini" @click="addOrUpdateHandler(scope.row.id,'info')">详情</el-button>
-                            <el-button v-if="isAuth('dictionaryChongwu','修改')" type="primary" icon="el-icon-edit" size="mini" @click="addOrUpdateHandler(scope.row.id)">修改</el-button>
-                            <el-button v-if="isAuth('dictionaryChongwu','删除')" type="danger" icon="el-icon-delete" size="mini" @click="deleteHandler(scope.row.id)">删除</el-button>
+                            <el-button v-if="isAuth('dictionaryChongwu', '查看')" type="success" icon="el-icon-tickets"
+                                size="mini" @click="addOrUpdateHandler(scope.row.id, 'info')">详情</el-button>
+                            <el-button v-if="isAuth('dictionaryChongwu', '修改')" type="primary" icon="el-icon-edit"
+                                size="mini" @click="addOrUpdateHandler(scope.row.id)">修改</el-button>
+                            <el-button v-if="isAuth('dictionaryChongwu', '删除')" type="danger" icon="el-icon-delete"
+                                size="mini" @click="deleteHandler(scope.row.id)">删除</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
-                <el-pagination
-                        clsss="pages"
-                        :layout="layouts"
-                        @size-change="sizeChangeHandle"
-                        @current-change="currentChangeHandle"
-                        :current-page="pageIndex"
-                        :page-sizes="[10, 20, 50, 100]"
-                        :page-size="Number(contents.pageEachNum)"
-                        :total="totalPage"
-                        :small="contents.pageStyle"
-                        class="pagination-content"
-                        :background="contents.pageBtnBG"
-                        :style="{textAlign:contents.pagePosition==1?'left':contents.pagePosition==2?'center':'right'}"
-                ></el-pagination>
+                <el-pagination clsss="pages" :layout="layouts" @size-change="sizeChangeHandle"
+                    @current-change="currentChangeHandle" :current-page="pageIndex" :page-sizes="[10, 20, 50, 100]"
+                    :page-size="Number(contents.pageEachNum)" :total="totalPage" :small="contents.pageStyle"
+                    class="pagination-content" :background="contents.pageBtnBG"
+                    :style="{ textAlign: contents.pagePosition == 1 ? 'left' : contents.pagePosition == 2 ? 'center' : 'right' }"></el-pagination>
             </div>
         </div>
         <!-- 添加/修改页面  将父组件的search方法传递给子组件-->
@@ -107,364 +81,383 @@
     </div>
 </template>
 <script>
-    import AddOrUpdate from "./add-or-update";
-    import styleJs from "../../../utils/style.js";
-    export default {
-        data() {
-            return {
-                searchForm: {
-                    key: ""
-                },
-                form:{},
-                dataList: [],
-                pageIndex: 1,
-                pageSize: 10,
-                totalPage: 0,
-                dataListLoading: false,
-                dataListSelections: [],
-                showFlag: true,
-                sfshVisiable: false,
-                shForm: {},
-                chartVisiable: false,
-                addOrUpdateFlag:false,
-                contents:null,
-                layouts: '',
+import AddOrUpdate from "./add-or-update";
+import styleJs from "../../../utils/style.js";
+export default {
+    data() {
+        return {
+            searchForm: {
+                key: ""
+            },
+            form: {},
+            dataList: [],
+            pageIndex: 1,
+            pageSize: 10,
+            totalPage: 0,
+            dataListLoading: false,
+            dataListSelections: [],
+            showFlag: true,
+            sfshVisiable: false,
+            shForm: {},
+            chartVisiable: false,
+            addOrUpdateFlag: false,
+            contents: null,
+            layouts: '',
 
 
 
-            };
+        };
+    },
+    created() {
+        this.contents = styleJs.listStyle();
+        this.init();
+        this.getDataList();
+        this.contentStyleChange()
+    },
+    mounted() {
+
+    },
+    filters: {
+        htmlfilter: function (val) {
+            return val.replace(/<[^>]*>/g).replace(/undefined/g, '');
+        }
+    },
+    components: {
+        AddOrUpdate,
+    },
+    methods: {
+        contentStyleChange() {
+            this.contentSearchStyleChange()
+            this.contentBtnAdAllStyleChange()
+            this.contentSearchBtnStyleChange()
+            this.contentTableBtnStyleChange()
+            this.contentPageStyleChange()
         },
-        created() {
-            this.contents = styleJs.listStyle();
-            this.init();
-            this.getDataList();
-            this.contentStyleChange()
-        },
-        mounted() {
+        contentSearchStyleChange() {
+            this.$nextTick(() => {
+                document.querySelectorAll('.form-content .slt .el-input__inner').forEach(el => {
+                    let textAlign = 'left'
+                    if (this.contents.inputFontPosition == 2) textAlign = 'center'
+                    if (this.contents.inputFontPosition == 3) textAlign = 'right'
+                    el.style.textAlign = textAlign
+                    el.style.height = this.contents.inputHeight
+                    el.style.lineHeight = this.contents.inputHeight
+                    el.style.color = this.contents.inputFontColor
+                    el.style.fontSize = this.contents.inputFontSize
+                    el.style.borderWidth = this.contents.inputBorderWidth
+                    el.style.borderStyle = this.contents.inputBorderStyle
+                    el.style.borderColor = this.contents.inputBorderColor
+                    el.style.borderRadius = this.contents.inputBorderRadius
+                    el.style.backgroundColor = this.contents.inputBgColor
+                })
+                if (this.contents.inputTitle) {
+                    document.querySelectorAll('.form-content .slt .el-form-item__label').forEach(el => {
+                        el.style.color = this.contents.inputTitleColor
+                        el.style.fontSize = this.contents.inputTitleSize
+                        el.style.lineHeight = this.contents.inputHeight
+                    })
+                }
+                setTimeout(() => {
+                    document.querySelectorAll('.form-content .slt .el-input__prefix').forEach(el => {
+                        el.style.color = this.contents.inputIconColor
+                        el.style.lineHeight = this.contents.inputHeight
+                    })
+                    document.querySelectorAll('.form-content .slt .el-input__suffix').forEach(el => {
+                        el.style.color = this.contents.inputIconColor
+                        el.style.lineHeight = this.contents.inputHeight
+                    })
+                    document.querySelectorAll('.form-content .slt .el-input__icon').forEach(el => {
+                        el.style.lineHeight = this.contents.inputHeight
+                    })
+                }, 10)
 
+            })
         },
-        filters: {
-            htmlfilter: function (val) {
-                return val.replace(/<[^>]*>/g).replace(/undefined/g,'');
+        // 搜索按钮
+        contentSearchBtnStyleChange() {
+            this.$nextTick(() => {
+                document.querySelectorAll('.form-content .slt .el-button--success').forEach(el => {
+                    el.style.height = this.contents.searchBtnHeight
+                    el.style.color = this.contents.searchBtnFontColor
+                    el.style.fontSize = this.contents.searchBtnFontSize
+                    el.style.borderWidth = this.contents.searchBtnBorderWidth
+                    el.style.borderStyle = this.contents.searchBtnBorderStyle
+                    el.style.borderColor = this.contents.searchBtnBorderColor
+                    el.style.borderRadius = this.contents.searchBtnBorderRadius
+                    el.style.backgroundColor = this.contents.searchBtnBgColor
+                })
+            })
+        },
+        // 新增、批量删除
+        contentBtnAdAllStyleChange() {
+            this.$nextTick(() => {
+                document.querySelectorAll('.form-content .ad .el-button--success').forEach(el => {
+                    el.style.height = this.contents.btnAdAllHeight
+                    el.style.color = this.contents.btnAdAllAddFontColor
+                    el.style.fontSize = this.contents.btnAdAllFontSize
+                    el.style.borderWidth = this.contents.btnAdAllBorderWidth
+                    el.style.borderStyle = this.contents.btnAdAllBorderStyle
+                    el.style.borderColor = this.contents.btnAdAllBorderColor
+                    el.style.borderRadius = this.contents.btnAdAllBorderRadius
+                    el.style.backgroundColor = this.contents.btnAdAllAddBgColor
+                })
+                document.querySelectorAll('.form-content .ad .el-button--danger').forEach(el => {
+                    el.style.height = this.contents.btnAdAllHeight
+                    el.style.color = this.contents.btnAdAllDelFontColor
+                    el.style.fontSize = this.contents.btnAdAllFontSize
+                    el.style.borderWidth = this.contents.btnAdAllBorderWidth
+                    el.style.borderStyle = this.contents.btnAdAllBorderStyle
+                    el.style.borderColor = this.contents.btnAdAllBorderColor
+                    el.style.borderRadius = this.contents.btnAdAllBorderRadius
+                    el.style.backgroundColor = this.contents.btnAdAllDelBgColor
+                })
+                document.querySelectorAll('.form-content .ad .el-button--warning').forEach(el => {
+                    el.style.height = this.contents.btnAdAllHeight
+                    el.style.color = this.contents.btnAdAllWarnFontColor
+                    el.style.fontSize = this.contents.btnAdAllFontSize
+                    el.style.borderWidth = this.contents.btnAdAllBorderWidth
+                    el.style.borderStyle = this.contents.btnAdAllBorderStyle
+                    el.style.borderColor = this.contents.btnAdAllBorderColor
+                    el.style.borderRadius = this.contents.btnAdAllBorderRadius
+                    el.style.backgroundColor = this.contents.btnAdAllWarnBgColor
+                })
+            })
+        },
+        // 表格
+        rowStyle({ row, rowIndex }) {
+            if (rowIndex % 2 == 1) {
+                if (this.contents.tableStripe) {
+                    return { color: this.contents.tableStripeFontColor }
+                }
+            } else {
+                return ''
             }
         },
-        components: {
-            AddOrUpdate,
+        cellStyle({ row, rowIndex }) {
+            if (rowIndex % 2 == 1) {
+                if (this.contents.tableStripe) {
+                    return { backgroundColor: this.contents.tableStripeBgColor }
+                }
+            } else {
+                return ''
+            }
         },
-        methods: {
-            contentStyleChange() {
-                this.contentSearchStyleChange()
-                this.contentBtnAdAllStyleChange()
-                this.contentSearchBtnStyleChange()
-                this.contentTableBtnStyleChange()
-                this.contentPageStyleChange()
-            },
-            contentSearchStyleChange() {
-                this.$nextTick(()=>{
-                    document.querySelectorAll('.form-content .slt .el-input__inner').forEach(el=>{
-                    let textAlign = 'left'
-                    if(this.contents.inputFontPosition == 2) textAlign = 'center'
-                if(this.contents.inputFontPosition == 3) textAlign = 'right'
-                el.style.textAlign = textAlign
-                el.style.height = this.contents.inputHeight
-                el.style.lineHeight = this.contents.inputHeight
-                el.style.color = this.contents.inputFontColor
-                el.style.fontSize = this.contents.inputFontSize
-                el.style.borderWidth = this.contents.inputBorderWidth
-                el.style.borderStyle = this.contents.inputBorderStyle
-                el.style.borderColor = this.contents.inputBorderColor
-                el.style.borderRadius = this.contents.inputBorderRadius
-                el.style.backgroundColor = this.contents.inputBgColor
-            })
-                if(this.contents.inputTitle) {
-                    document.querySelectorAll('.form-content .slt .el-form-item__label').forEach(el=>{
-                        el.style.color = this.contents.inputTitleColor
-                    el.style.fontSize = this.contents.inputTitleSize
-                    el.style.lineHeight = this.contents.inputHeight
-                })
-                }
-                setTimeout(()=>{
-                    document.querySelectorAll('.form-content .slt .el-input__prefix').forEach(el=>{
-                    el.style.color = this.contents.inputIconColor
-                el.style.lineHeight = this.contents.inputHeight
-            })
-                document.querySelectorAll('.form-content .slt .el-input__suffix').forEach(el=>{
-                    el.style.color = this.contents.inputIconColor
-                el.style.lineHeight = this.contents.inputHeight
-            })
-                document.querySelectorAll('.form-content .slt .el-input__icon').forEach(el=>{
-                    el.style.lineHeight = this.contents.inputHeight
-            })
-            },10)
+        headerRowStyle({ row, rowIndex }) {
+            return { color: this.contents.tableHeaderFontColor }
+        },
+        headerCellStyle({ row, rowIndex }) {
+            return { backgroundColor: this.contents.tableHeaderBgColor }
+        },
+        // 表格按钮
+        contentTableBtnStyleChange() {
+        },
+        // 分页
+        contentPageStyleChange() {
+            let arr = []
+            if (this.contents.pageTotal) arr.push('total')
+            if (this.contents.pageSizes) arr.push('sizes')
+            if (this.contents.pagePrevNext) {
+                arr.push('prev')
+                if (this.contents.pagePager) arr.push('pager')
+                arr.push('next')
+            }
+            if (this.contents.pageJumper) arr.push('jumper')
+            this.layouts = arr.join()
+            this.contents.pageEachNum = 10
+        },
 
-            })
-            },
-            // 搜索按钮
-            contentSearchBtnStyleChange() {
-                this.$nextTick(()=>{
-                    document.querySelectorAll('.form-content .slt .el-button--success').forEach(el=>{
-                    el.style.height = this.contents.searchBtnHeight
-                el.style.color = this.contents.searchBtnFontColor
-                el.style.fontSize = this.contents.searchBtnFontSize
-                el.style.borderWidth = this.contents.searchBtnBorderWidth
-                el.style.borderStyle = this.contents.searchBtnBorderStyle
-                el.style.borderColor = this.contents.searchBtnBorderColor
-                el.style.borderRadius = this.contents.searchBtnBorderRadius
-                el.style.backgroundColor = this.contents.searchBtnBgColor
-            })
-            })
-            },
-            // 新增、批量删除
-            contentBtnAdAllStyleChange() {
-                this.$nextTick(()=>{
-                    document.querySelectorAll('.form-content .ad .el-button--success').forEach(el=>{
-                    el.style.height = this.contents.btnAdAllHeight
-                el.style.color = this.contents.btnAdAllAddFontColor
-                el.style.fontSize = this.contents.btnAdAllFontSize
-                el.style.borderWidth = this.contents.btnAdAllBorderWidth
-                el.style.borderStyle = this.contents.btnAdAllBorderStyle
-                el.style.borderColor = this.contents.btnAdAllBorderColor
-                el.style.borderRadius = this.contents.btnAdAllBorderRadius
-                el.style.backgroundColor = this.contents.btnAdAllAddBgColor
-            })
-                document.querySelectorAll('.form-content .ad .el-button--danger').forEach(el=>{
-                    el.style.height = this.contents.btnAdAllHeight
-                el.style.color = this.contents.btnAdAllDelFontColor
-                el.style.fontSize = this.contents.btnAdAllFontSize
-                el.style.borderWidth = this.contents.btnAdAllBorderWidth
-                el.style.borderStyle = this.contents.btnAdAllBorderStyle
-                el.style.borderColor = this.contents.btnAdAllBorderColor
-                el.style.borderRadius = this.contents.btnAdAllBorderRadius
-                el.style.backgroundColor = this.contents.btnAdAllDelBgColor
-            })
-                document.querySelectorAll('.form-content .ad .el-button--warning').forEach(el=>{
-                    el.style.height = this.contents.btnAdAllHeight
-                el.style.color = this.contents.btnAdAllWarnFontColor
-                el.style.fontSize = this.contents.btnAdAllFontSize
-                el.style.borderWidth = this.contents.btnAdAllBorderWidth
-                el.style.borderStyle = this.contents.btnAdAllBorderStyle
-                el.style.borderColor = this.contents.btnAdAllBorderColor
-                el.style.borderRadius = this.contents.btnAdAllBorderRadius
-                el.style.backgroundColor = this.contents.btnAdAllWarnBgColor
-            })
-            })
-            },
-            // 表格
-            rowStyle({ row, rowIndex}) {
-                if (rowIndex % 2 == 1) {
-                    if(this.contents.tableStripe) {
-                        return {color:this.contents.tableStripeFontColor}
-                    }
-                } else {
-                    return ''
-                }
-            },
-            cellStyle({ row, rowIndex}){
-                if (rowIndex % 2 == 1) {
-                    if(this.contents.tableStripe) {
-                        return {backgroundColor:this.contents.tableStripeBgColor}
-                    }
-                } else {
-                    return ''
-                }
-            },
-            headerRowStyle({ row, rowIndex}){
-                return {color: this.contents.tableHeaderFontColor}
-            },
-            headerCellStyle({ row, rowIndex}){
-                return {backgroundColor: this.contents.tableHeaderBgColor}
-            },
-            // 表格按钮
-            contentTableBtnStyleChange(){
-            },
-            // 分页
-            contentPageStyleChange(){
-                let arr = []
-                if(this.contents.pageTotal) arr.push('total')
-                if(this.contents.pageSizes) arr.push('sizes')
-                if(this.contents.pagePrevNext){
-                    arr.push('prev')
-                    if(this.contents.pagePager) arr.push('pager')
-                    arr.push('next')
-                }
-                if(this.contents.pageJumper) arr.push('jumper')
-                this.layouts = arr.join()
-                this.contents.pageEachNum = 10
-            },
-
-            init () {
-            },
-            search() {
-                this.pageIndex = 1;
-                this.getDataList();
-            },
-            // 获取数据列表
-            getDataList() {
-                this.dataListLoading = true;
-                let params = {
-                    page: this.pageIndex,
-                    limit: this.pageSize,
-                    sort: 'id',
-                }
-                if(this.searchForm.indexNameSearch!='' && this.searchForm.indexNameSearch!=undefined){
-                    params['indexName'] = this.searchForm.indexNameSearch
-                }
-                //本表的
-                params['dicCode'] = "chongwu_types"//编码名字
-                params['dicName'] = "宠物类型",//汉字名字
+        init() {
+        },
+        search() {
+            this.pageIndex = 1;
+            this.getDataList();
+        },
+        // 获取数据列表
+        getDataList() {
+            this.dataListLoading = true;
+            let params = {
+                page: this.pageIndex,
+                limit: this.pageSize,
+                sort: 'id',
+            }
+            if (this.searchForm.indexNameSearch != '' && this.searchForm.indexNameSearch != undefined) {
+                params['indexName'] = this.searchForm.indexNameSearch
+            }
+            //本表的
+            params['dicCode'] = "chongwu_types"//编码名字
+            params['dicName'] = "宠物类型",//汉字名字
                 this.$http({
                     url: `${this.$baseURL}/dictionary/page`,
                     method: "get",
                     params: params
                 }).then(({ data }) => {
                     if (data && data.code === 0) {
-                    this.dataList = data.data.list;
-                    this.totalPage = data.data.total;
-                } else {
-                    this.dataList = [];
-                    this.totalPage = 0;
+                        this.dataList = data.data.list;
+                        this.totalPage = data.data.total;
+                    } else {
+                        this.dataList = [];
+                        this.totalPage = 0;
+                    }
+                    this.dataListLoading = false;
+                });
+        },
+        // 每页数
+        sizeChangeHandle(val) {
+            this.pageSize = val;
+            this.pageIndex = 1;
+            this.getDataList();
+        },
+        // 当前页
+        currentChangeHandle(val) {
+            this.pageIndex = val;
+            this.getDataList();
+        },
+        // 多选
+        selectionChangeHandler(val) {
+            this.dataListSelections = val;
+        },
+        // 添加/修改
+        addOrUpdateHandler(id, type) {
+            this.showFlag = false;
+            this.addOrUpdateFlag = true;
+            this.crossAddOrUpdateFlag = false;
+            if (type != 'info') {
+                type = 'else';
+            }
+            this.$nextTick(() => {
+                this.$refs.addOrUpdate.init(id, type);
+            });
+        },
+        // 删除
+        deleteHandler(id) {
+            try {
+                // Ensure dataListSelections exists and is an array to prevent runtime errors
+                if (!this.dataListSelections || !Array.isArray(this.dataListSelections)) {
+                    this.$message.error("数据列表未初始化");
+                    return;
                 }
-                this.dataListLoading = false;
-            });
-            },
-            // 每页数
-            sizeChangeHandle(val) {
-                this.pageSize = val;
-                this.pageIndex = 1;
-                this.getDataList();
-            },
-            // 当前页
-            currentChangeHandle(val) {
-                this.pageIndex = val;
-                this.getDataList();
-            },
-            // 多选
-            selectionChangeHandler(val) {
-                this.dataListSelections = val;
-            },
-            // 添加/修改
-            addOrUpdateHandler(id,type) {
-                this.showFlag = false;
-                this.addOrUpdateFlag = true;
-                this.crossAddOrUpdateFlag = false;
-                if(type!='info'){
-                    type = 'else';
+
+                // Construct IDs array
+                var ids = id ? [Number(id)] : this.dataListSelections.map(item => Number(item.id));
+
+                // Validate IDs before proceeding
+                if (!ids.length || ids.some(isNaN)) {
+                    this.$message.error("未找到有效的 ID，删除操作取消");
+                    return;
                 }
-                this.$nextTick(() => {
-                    this.$refs.addOrUpdate.init(id,type);
-            });
-            },
-            // 删除
-            deleteHandler(id) {
-                var ids = id
-                        ? [Number(id)]
-                        : this.dataListSelections.map(item => {
-                    return Number(item.id);
-            });
-                this.$confirm(`确定进行[${id ? "删除" : "批量删除"}]操作?`, "提示", {
+
+                // Confirmation dialog
+                this.$confirm(`确定进行 [${id ? "删除" : "批量删除"}] 操作?`, "提示", {
                     confirmButtonText: "确定",
                     cancelButtonText: "取消",
                     type: "warning"
-                }).then(() => {
-                    this.$http({
-                    url: `${this.$baseURL}/dictionary/delete`,
-                    method: "post",
-                    data: ids
-                }).then(({ data }) => {
-                    if (data && data.code === 0) {
-                    this.$message({
-                        message: "操作成功",
-                        type: "success",
-                        duration: 1500,
-                        onClose: () => {
-                        this.search();
-                }
-                });
-                } else {
-                    this.$message.error(data.msg);
-                }
-            }).catch((err) => {
-                    if (err !== "cancel") {
-                        console.error("删除操作失败:", err);
-                        this.$message.error("删除操作失败");
-                    } else {
-                        this.$message({
-                            type: "info",
-                            message: "操作已取消"
+                })
+                    .then(() => {
+                        return this.$http({
+                            url: `${this.$baseURL}/dictionary/delete`,
+                            method: "post",
+                            data: ids
                         });
-                    }
-                });
-            });
-            },
+                    })
+                    .then(({ data }) => {
+                        if (data && data.code === 0) {
+                            this.$message({
+                                message: "操作成功",
+                                type: "success",
+                                duration: 1500,
+                                onClose: () => {
+                                    this.search(); // Refresh the data list after deletion
+                                }
+                            });
+                        } else {
+                            this.$message.error(data.msg || "删除失败");
+                        }
+                    })
+                    .catch((err) => {
+                        if (err === "cancel") {
+                            this.$message({
+                                type: "info",
+                                message: "操作已取消"
+                            });
+                        } else {
+                            console.error("删除操作失败:", err);
+                            this.$message.error("删除操作失败，请检查网络或联系管理员");
+                        }
+                    });
 
-
+            } catch (error) {
+                console.error("Unexpected error in deleteHandler:", error);
+                this.$message.error("系统错误，请稍后重试");
+            }
         }
+        ,
 
-    };
+
+    }
+
+};
 </script>
 <style lang="scss" scoped>
 .slt {
     margin: 0 !important;
     display: flex;
-  }
+}
 
-  .ad {
+.ad {
     margin: 0 !important;
     display: flex;
-  }
+}
 
-  .pages {
-    & ::v-deep(el-pagination__sizes){
-      & ::v-deep(el-input__inner) {
-        height: 22px;
-        line-height: 22px;
-      }
+.pages {
+    & ::v-deep(el-pagination__sizes) {
+        & ::v-deep(el-input__inner) {
+            height: 22px;
+            line-height: 22px;
+        }
     }
-  }
+}
 
 
-  .el-button+.el-button {
-    margin:0;
-  }
+.el-button+.el-button {
+    margin: 0;
+}
 
-  .tables {
-	& ::v-deep(.el-button--success) {
-		height: 40px;
-		color: rgba(52, 51, 47, 0.93);
-		font-size: 14px;
-		border-width: 1px;
-		border-style: solid;
-		border-color: #DCDFE6;
-		border-radius: 8px;
-		background-color: rgba(232, 198, 111, 1);
-	}
+.tables {
+    & ::v-deep(.el-button--success) {
+        height: 40px;
+        color: rgba(52, 51, 47, 0.93);
+        font-size: 14px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #DCDFE6;
+        border-radius: 8px;
+        background-color: rgba(232, 198, 111, 1);
+    }
 
-	& ::v-deep(.el-button--primary) {
-		height: 40px;
-		color: #333;
-		font-size: 14px;
-		border-width: 1px;
-		border-style: solid;
-		border-color: #DCDFE6;
-		border-radius: 8px;
-		background-color: rgba(102, 130, 214, 0.51);
-	}
+    & ::v-deep(.el-button--primary) {
+        height: 40px;
+        color: #333;
+        font-size: 14px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #DCDFE6;
+        border-radius: 8px;
+        background-color: rgba(102, 130, 214, 0.51);
+    }
 
-	& ::v-deep(.el-button--danger) {
-		height: 40px;
-		color: #333;
-		font-size: 14px;
-		border-width: 1px;
-		border-style: solid;
-		border-color: #DCDFE6;
-		border-radius: 8px;
-		background-color: rgba(245, 83, 185, 0.72);
-	}
+    & ::v-deep(.el-button--danger) {
+        height: 40px;
+        color: #333;
+        font-size: 14px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #DCDFE6;
+        border-radius: 8px;
+        background-color: rgba(245, 83, 185, 0.72);
+    }
 
     & ::v-deep(.el-button) {
-      margin: 4px;
+        margin: 4px;
     }
-  }
+}
 </style>
-
-
