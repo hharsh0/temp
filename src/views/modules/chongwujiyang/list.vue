@@ -1,6 +1,6 @@
 <template>
     <div class="main-content">
-        <el-dialog title="审核" v-model:visible="chongwujiyangYesnoTypesVisible">
+        <el-dialog title="审核" v-model="chongwujiyangYesnoTypesVisible">
             <el-form :model="form">
                 <input type="hidden" v-model="form.id">
                 <el-form-item label="审核" >
@@ -932,6 +932,7 @@
                 this.$message.error('上传失败');
             },
             openYesnoTypes(id) {
+                console.log("审核 button clicked with id:", id);
                 let _this = this;
                 _this.form.id = null;
                 _this.form.id = id;
