@@ -800,6 +800,7 @@ export default {
             
             // Ensure ids array is correctly populated
             var ids = id ? [Number(id)] : this.dataListSelections.map(item => Number(item.id));
+            console.log(ids);
 
             // Check if there are valid IDs before proceeding
             if (!ids.length || ids.some(isNaN)) {
@@ -817,7 +818,7 @@ export default {
                     return this.$http({
                         url: `${this.$baseURL}/forum/delete`,
                         method: "post",
-                        data: { ids } // Send IDs as an object (adjust if API expects an array)
+                        data:  ids  // Send IDs as an object (adjust if API expects an array)
                     });
                 })
                 .then(({ data }) => {
