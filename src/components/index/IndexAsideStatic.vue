@@ -94,7 +94,6 @@ export default {
   },
   mounted() {
     const menus = menu.list()
-    console.log(menus)
     this.menuList = menus
     this.role = this.$storage.get('role')
   },

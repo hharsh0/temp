@@ -48,24 +48,29 @@ export default {
     }
   },
   watch: {
-    fileUrls: function(val, oldVal) {
-      //   console.log("new: %s, old: %s", val, oldVal);
+    fileUrls(val, oldVal) {
+    if (typeof val === 'string') {
       this.init();
+    } else {
+      console.warn("Unexpected value for fileUrls:", val);
     }
+  }
   },
   computed: {
     // 计算属性的 getter
     getActionUrl: function() {
       // return base.url + this.action + "?token=" + storage.get("token");
-      return `/${this.$base.name}/` + this.action;
+      // return `/${this.$base.name}/` + this.action;
+      console.log(this.action);
+      return this.$baseURL + '/' + 'file/upload';
     }
   },
   methods: {
     // 初始化
     init() {
-      //   console.log(this.fileUrls);
+      // console.log(this.fileUrls);
       if (this.fileUrls) {
-        this.fileUrlList = this.fileUrls.split(",");
+        this.fileUrlList = this?.fileUrls?.split(",");
         let fileArray = [];
         this.fileUrlList.forEach(function(item, index) {
           var url = item;
@@ -86,7 +91,7 @@ export default {
     handleUploadSuccess(res, file, fileList) {
       if (res && res.code === 0) {
         fileList[fileList.length - 1]["url"] =
-          this.$base.url + "upload/" + file.response.file;
+          this.$baseURL + "/upload/" + file.response.file;
         this.setFileList(fileList);
         this.$emit("change", this.fileUrlList.join(","));
       } else {

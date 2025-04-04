@@ -1,6 +1,6 @@
 <template>
     <div class="main-content">
-        <el-dialog title="帖子回复详情" v-model:visible="forumReplyDialogVisible">
+        <el-dialog title="帖子回复详情" v-model="forumReplyDialogVisible">
             <el-dialog width="30%" :title="forumReplyInfoContent" v-model:visible="forumReplyInfoDialogVisible"
                 append-to-body>
             </el-dialog>
@@ -880,6 +880,7 @@ export default {
         openReplyForum(id, forumName, forumContent) {
             let _this = this;
             // 当前帖子相关 start
+            console.log("clicked");
             _this.superIds = id;
             _this.forumTitle = forumName;
             _this.forumContent = forumContent;
